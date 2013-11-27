@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Flexgp.github.io by flexgp</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Flexgp.github.io</h1>
+        <h2>Tutorial and Blog</h2>
+        <a href="https://github.com/flexgp" class="button"><small>Follow me on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="welcome-to-flexgp" class="anchor" href="#welcome-to-flexgp"><span class="octicon octicon-link"></span></a>Welcome to FlexGP</h1>
+
+<p>FlexGP is a Evolutionary Computation framework aimed at data modeling and knowledge discovery. Current release provides functionality both for modeling data and for testing the retrieved models. In this website we provide a quick tutorial to get started and model your data.</p>
+
+<h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Tutorial</h1>
+
+<h2>
+<a name="step-1-downloading-the-source-code" class="anchor" href="#step-1-downloading-the-source-code"><span class="octicon octicon-link"></span></a>Step 1: Downloading the source code</h2>
+
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
+
+<h2>
+<a name="step-2-running-flexgp" class="anchor" href="#step-2-running-flexgp"><span class="octicon octicon-link"></span></a>Step 2: Running FlexGP</h2>
+
+<p>It is possible to run FlexGP directly from your terminal or from Matlab</p>
+
+<h3>
+<a name="running-flexgp-from-the-terminal" class="anchor" href="#running-flexgp-from-the-terminal"><span class="octicon octicon-link"></span></a>Running FlexGP from the terminal</h3>
+
+<h4>
+<a name="model-the-data" class="anchor" href="#model-the-data"><span class="octicon octicon-link"></span></a>Model the data</h4>
+
+<p>All you need to provide is the path to your dataset and the optimization time</p>
+
+<pre><code>$ java -jar flexgp.jar -train path_to_your_data -minutes 10 
+</code></pre>
+
+<p>At the end of the run a set of files are generated:</p>
+
+<ol>
+<li><p><strong>pareto.txt</strong>: models forming the Pareto Front (accuracy vs model complexity).</p></li>
+<li><p><strong>leastComplex.txt</strong>: least complex model of the Pareto Front.</p></li>
+<li><p><strong>mostAccurate.txt</strong>: most accurate model of the Pareto Front.</p></li>
+<li><p><strong>knee.txt</strong>: model at the knee of the Pareto Front.</p></li>
+<li><p><strong>bestModelGeneration.txt</strong>: most accurate model per generation.</p></li>
+<li><p><strong>fusedModel.txt</strong>: fused model of the Pareto Front obtained with Adaptive Regression by Mixing (see <em>Adaptive Regression by Mixing. Yuhong Yang. Journal of the American Statistical Association Vol. 96, No. 454 (Jun., 2001), pp. 574-588</em>).</p></li>
+</ol><h4>
+<a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test the models</h4>
+
+<p>Once the modeling is finished, it is possible to obtain the Mean Squared Error (MSE) of the models in files 1) to 5) with </p>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer true -scaled model_file 
+</code></pre>
+
+<p>To obtain the MSE of the fused model of the Pareto Front:</p>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer false -fused model_file 
+</code></pre>
+
+<p>The <em>-integer</em> flag indicated whether the target values are integer or floating point values. </p>
+
+<h3>
+<a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link"></span></a>Running FlexGP from Matlab</h3>
+
+<h2>
+<a name="step-3-speeding-up-your-runs-with-c-optimized-execution" class="anchor" href="#step-3-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon octicon-link"></span></a>Step 3: Speeding up your runs with C++ optimized execution</h2>
+
+<p>This option is only supported for Linux Debian platforms and requires the gcc and g++ compilers:</p>
+
+<pre><code>$ sudo apt-get install gcc
+$ sudo apt-get install g++
+</code></pre>
+
+<p>Modify the Linux kernel parameter governing the shared memory size to be at least as large as the data being analyzed, in the next example we set it to 2GB</p>
+
+<pre><code>$ echo 2147483648 &gt; /proc/sys/kernel/shmmax
+</code></pre>
+
+<pre><code>$ sudo nano /sys/kernel/shmmax 
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
+
+<h1>
+<a name="results" class="anchor" href="#results"><span class="octicon octicon-link"></span></a>Results</h1>
+
+<p>To check reports visit our blog:
+<a href="blog.html">FlexGP Blog</a></p>
+
+<h1>
+<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h1>
+
+<p>This page has been created by the Any-scale Learning For All (ALFA) group at MIT. Please contact us at: <a href="mailto:flexgp@csail.mit.edu">flexgp@csail.mit.edu</a> </p>
+
+<p>author: <a href="https://github.com/ignacioarnaldo" class="user-mention">@ignacioarnaldo</a></p>
+        </section>
+
+        <aside id="sidebar">
+
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("flexgp");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

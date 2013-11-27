@@ -52,6 +52,37 @@ $ git checkout gh-pages
 <h3>
 <a name="running-flexgp-from-the-terminal" class="anchor" href="#running-flexgp-from-the-terminal"><span class="octicon octicon-link"></span></a>Running FlexGP from the terminal</h3>
 
+<h4>
+<a name="model-the-data" class="anchor" href="#model-the-data"><span class="octicon octicon-link"></span></a>Model the data</h4>
+
+<p>All you need to provide is the path to your dataset and the optimization time</p>
+
+<pre><code>$ java -jar flexgp.jar -train path_to_your_data -minutes 10 
+</code></pre>
+
+<p>At the end of the run a set of files are generated:
+1) <strong>pareto.txt</strong>: models forming the Pareto Front (accuracy vs model complexity)
+2) <strong>leastComplex.txt</strong>: least complex model of the Pareto Front
+3) <strong>mostAccurate.txt</strong>: most accurate model of the Pareto Front
+4) <strong>knee.txt</strong>: model at the knee of the Pareto front
+5) <strong>bestModelGeneration.txt</strong>: most accurate model per generation
+6) <strong>fusedModel.txt</strong>: fused model of the Pareto Front obtained with Adaptive Regression by Mixing (see <em>Adaptive Regression by Mixing. Yuhong Yang. Journal of the American Statistical Association Vol. 96, No. 454 (Jun., 2001), pp. 574-588</em>)</p>
+
+<h4>
+<a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test the models</h4>
+
+<p>Once the modeling is finished, it is possible to obtain the Mean Squared Error (MSE) of the models in files 1) to 5) with </p>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer true -scaled model_file 
+</code></pre>
+
+<p>To obtain the MSE of the fused model of the Pareto Front:</p>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer false -fused model_file 
+</code></pre>
+
+<p>The <em>-integer</em> flag indicated whether the target values are integer or floating point values. </p>
+
 <h3>
 <a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link"></span></a>Running FlexGP from Matlab</h3>
 
@@ -64,7 +95,7 @@ $ git checkout gh-pages
 $ sudo apt-get install g++
 </code></pre>
 
-<p>Modify the Linux kernel parameter governing the shared memory size to be at least as large as the data being analyzed, in the nex example we set it to 2GB</p>
+<p>Modify the Linux kernel parameter governing the shared memory size to be at least as large as the data being analyzed, in the next example we set it to 2GB</p>
 
 <pre><code>$ echo 2147483648 &gt; /proc/sys/kernel/shmmax
 </code></pre>

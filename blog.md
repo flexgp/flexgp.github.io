@@ -20,7 +20,7 @@
     <header>
       <div class="inner">
         <h1>Flexgp.github.io</h1>
-        <h2>Tutorial and Blog</h2>
+        <h2>FlexGP Blog</h2>
         <a href="https://github.com/flexgp" class="button"><small>Follow me on</small>GitHub</a>
       </div>
     </header>
@@ -29,52 +29,26 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a name="welcome-to-flexgp" class="anchor" href="#welcome-to-flexgp"><span class="octicon octicon-link"></span></a>Welcome to FlexGP</h1>
+<a name="welcome-to-flexgp" class="anchor" href="#welcome-to-flexgp"><span class="octicon octicon-link"></span></a>Welcome to the FlexGP blog</h1>
 
-<p>FlexGP is a Evolutionary Computation framework aimed at data modeling and knowledge discovery. Current release provides functionality both for modeling data and for testing the retrieved models. In this website we provide a quick tutorial to get started and model your data.</p>
+<p>In this blog we will report the results obtained with the FlexGP data modeler for several datasets.</p>
 
 <h1>
-<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Tutorial</h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>NOx Emissions dataset</h1>
 
-<h2>
-<a name="step-1-downloading-the-source-code" class="anchor" href="#step-1-downloading-the-source-code"><span class="octicon octicon-link"></span></a>Step 1: Downloading the source code</h2>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>NOx Emissions dataset</h1>
+
+
+<pre><code>$ java -jar flexgp.jar -train path_to_NOx_data -minutes 60 
 </code></pre>
 
-<h2>
-<a name="step-2-running-flexgp" class="anchor" href="#step-2-running-flexgp"><span class="octicon octicon-link"></span></a>Step 2: Running FlexGP</h2>
+<p>At the end of the run we measure the accuracy of the most accurate model and the fused Pareto Front Model:</p>
 
-<p>It is possible to run FlexGP directly from your terminal or from Matlab</p>
 
-<h3>
-<a name="running-flexgp-from-the-terminal" class="anchor" href="#running-flexgp-from-the-terminal"><span class="octicon octicon-link"></span></a>Running FlexGP from the terminal</h3>
-
-<h4>
-<a name="model-the-data" class="anchor" href="#model-the-data"><span class="octicon octicon-link"></span></a>Model the data</h4>
-
-<p>All you need to provide is the path to your dataset and the optimization time</p>
-
-<pre><code>$ java -jar flexgp.jar -train path_to_your_data -minutes 10 
-</code></pre>
-
-<p>At the end of the run a set of files are generated:</p>
-
-<ol>
-<li><p><strong>pareto.txt</strong>: models forming the Pareto Front (accuracy vs model complexity).</p></li>
-<li><p><strong>leastComplex.txt</strong>: least complex model of the Pareto Front.</p></li>
-<li><p><strong>mostAccurate.txt</strong>: most accurate model of the Pareto Front.</p></li>
-<li><p><strong>knee.txt</strong>: model at the knee of the Pareto Front.</p></li>
-<li><p><strong>bestModelGeneration.txt</strong>: most accurate model per generation.</p></li>
-<li><p><strong>fusedModel.txt</strong>: fused model of the Pareto Front obtained with Adaptive Regression by Mixing (see <em>Adaptive Regression by Mixing. Yuhong Yang. Journal of the American Statistical Association Vol. 96, No. 454 (Jun., 2001), pp. 574-588</em>).</p></li>
-</ol><h4>
-<a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test the models</h4>
-
-<p>Once the modeling is finished, it is possible to obtain the Mean Squared Error (MSE) of the models in files 1) to 5) with </p>
-
-<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer true -scaled model_file 
+<pre><code>$ java -jar flexgp.jar -test path_to_NOx_data -integer false -scaled mostAccurate.txt 
+$ java -jar flexgp.jar -test path_to_NOx_data -integer false -fused pareto.txt 
 </code></pre>
 
 <p>To obtain the MSE of the fused model of the Pareto Front:</p>

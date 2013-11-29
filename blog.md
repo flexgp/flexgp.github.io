@@ -113,7 +113,7 @@ $ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -fused pareto.
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Million Song Dataset dataset</h1>
 
-The Million Song Dataset year prediction challenge is a regression problem in which the goal is to predict the year in which a given song was released. The dataset is composed of more than 500K songs, each described with a set of 500K features. 
+The Million Song Dataset year prediction challenge is a regression problem in which the goal is to predict the year in which a given song was released. The dataset is composed of more than 500K songs, each described with a set of 90 features. 
 
 The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account to perform the data split. data is split into training and test set:
 <pre><code>$ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 -cpp 8

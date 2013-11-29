@@ -33,63 +33,110 @@
 
 <p>In this blog we will report the results obtained with the FlexGP data modeler for several datasets.</p>
 
+
+
+
 <h1>
-<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>NOx Emissions dataset</h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Wine quality dataset</h1>
+
+<p>This problem consists in modeling the quality of a given red or white wine given 11 features such as acidity, alcohol degree etc.</p>
+
+<pre><code>$ java -jar flexgp.jar -train path_to_redWine_data -minutes 60 
+$ java -jar flexgp.jar -train path_to_whiteWine_data -minutes 60 
+</code></pre>
+
+<p>At the end of both runs we measure the accuracy of the most accurate models and the fused Pareto Front Model:</p>
+
+<h2>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Red wine dataset</h2>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_NOx_data -integer false -scaled mostAccurate.txt 
+$ java -jar flexgp.jar -test path_to_redWine_data -integer false -fused pareto.txt 
+</code></pre>
+
+<h2>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>White wine dataset</h2>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_NOx_data -integer false -scaled mostAccurate.txt 
+$ java -jar flexgp.jar -test path_to_whiteWine_data -integer false -fused pareto.txt 
+</code></pre>
+
+
 
 
 <h1>
-<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>NOx Emissions dataset</h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Kaggle bond Price dataset</h1>
 
+Some preprocessing steps are required in this case to adapt the data to a format compatible with FlexGP. We first reduce the kaggle dataset available at by taking the first 200K lines:
+<pre><code>$ head -n 200000 kaggle.data > reducedKaggle.data 
+</code></pre>
 
-<pre><code>$ java -jar flexgp.jar -train path_to_NOx_data -minutes 60 
+We then remove all the lines containing NaN values:
+<pre><code>$ less reducedKaggle.data | grep -v Nan > cleanKaggle.data
+</code></pre>
+
+The proposed challenge is to predict the bond price given in the third column. Note that columns 1 and 2 coresspond to id nominal values and this should be ignored. In FlexGP the targets need to be stored in the last column, therefore, we extract the targets and save them to a different file:
+<pre><code>$ cut -d, -f3 cleanKaggle.data  > targets.data
+</code></pre>
+
+We then remove the first, second, and third columns of the dataset and paste the targets in the last column of the dataset:
+<pre><code>$ cut --complement -d, -f1,2,3 cleanKaggle.data  > cleanColsKaggle.data
+$ paste -d, cleanColsKaggle.data  targets.data > finalKaggle.data
+</code></pre>
+
+Finally, we employ FlexGP to model the data. In this case, the -cpp flag is employed, thus enabling the optimized C++ evaluation of candidate solutions. In the example below, 8 threads are used to speedup the process:
+<pre><code>$ java -jar flexgp.jar -train path_to_kaggle_data -minutes 60 -cpp 8
 </code></pre>
 
 <p>At the end of the run we measure the accuracy of the most accurate model and the fused Pareto Front Model:</p>
 
 
-<pre><code>$ java -jar flexgp.jar -test path_to_NOx_data -integer false -scaled mostAccurate.txt 
-$ java -jar flexgp.jar -test path_to_NOx_data -integer false -fused pareto.txt 
+<pre><code>$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled mostAccurate.txt 
+$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -fused pareto.txt 
 </code></pre>
 
-<p>To obtain the MSE of the fused model of the Pareto Front:</p>
 
-<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer false -fused model_file 
-</code></pre>
 
-<p>The <em>-integer</em> flag indicated whether the target values are integer or floating point values. </p>
-
-<h3>
-<a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link"></span></a>Running FlexGP from Matlab</h3>
-
-<h2>
-<a name="step-3-speeding-up-your-runs-with-c-optimized-execution" class="anchor" href="#step-3-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon octicon-link"></span></a>Step 3: Speeding up your runs with C++ optimized execution</h2>
-
-<p>This option is only supported for Linux Debian platforms and requires the gcc and g++ compilers:</p>
-
-<pre><code>$ sudo apt-get install gcc
-$ sudo apt-get install g++
-</code></pre>
-
-<p>Modify the Linux kernel parameter governing the shared memory size to be at least as large as the data being analyzed, in the next example we set it to 2GB</p>
-
-<pre><code>$ echo 2147483648 &gt; /proc/sys/kernel/shmmax
-</code></pre>
-
-<pre><code>$ sudo nano /sys/kernel/shmmax 
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
 
 <h1>
-<a name="results" class="anchor" href="#results"><span class="octicon octicon-link"></span></a>Results</h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>NOx Emissions dataset</h1>
 
-<p>To check reports visit our blog:
-<a href="blog.html">FlexGP Blog</a></p>
+The data is split into training and test set. The models obtained from the training set are then tested on the test set:
+<pre><code>$ java -jar flexgp.jar -train path_to_NOx_train_data -minutes 60 
+$ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -scaled mostAccurate.txt 
+$ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -fused pareto.txt 
+</code></pre>
+
+
+
+<h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Million Song Dataset dataset</h1>
+
+The Million Song Dataset year prediction challenge is a regression problem in which the goal is to predict the year in which a given song was released. The dataset is composed of more than 500K songs, each described with a set of 500K features. 
+
+The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account to perform the data split. data is split into training and test set:
+<pre><code>$ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer false -scaled mostAccurate.txt 
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer false -fused pareto.txt 
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <h1>
 <a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h1>
 
-<p>This page has been created by the Any-scale Learning For All (ALFA) group at MIT. Please contact us at: <a href="mailto:flexgp@csail.mit.edu">flexgp@csail.mit.edu</a> </p>
+<p>The <a href="index.html">FlexGP project</a> has been developed by the Any-scale Learning For All (ALFA) group at MIT. Please contact us at: <a href="mailto:flexgp@csail.mit.edu">flexgp@csail.mit.edu</a> </p>
 
 <p>author: <a href="https://github.com/ignacioarnaldo" class="user-mention">@ignacioarnaldo</a></p>
         </section>

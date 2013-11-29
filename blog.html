@@ -20,7 +20,7 @@
     <header>
       <div class="inner">
         <h1>Flexgp.github.io</h1>
-        <h2>FlexGP Blog</h2>
+        <h2>Welcome to the FlexGP Blog</h2>
         <a href="https://github.com/flexgp" class="button"><small>Follow me on</small>GitHub</a>
       </div>
     </header>
@@ -29,23 +29,23 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a name="welcome-to-flexgp" class="anchor" href="#welcome-to-flexgp"><span class="octicon octicon-link"></span></a>Welcome to the FlexGP blog</h1>
-
-<p>In this blog we will report the results obtained with the FlexGP data modeler for several datasets.</p>
 
 
+<p>In this blog we will report the models retrieved from different datasets and analyze their accuracy.</p>
 
 
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Wine quality dataset</h1>
 
-<p>This problem consists in modeling the quality of a given red or white wine given 11 features such as acidity, alcohol degree etc.</p>
+<p>This problem consists in modeling the quality (a grade from 1 to 10) of a given red or white wine given 
+11 features such as acidity, alcohol degree etc.</p>
 
 <pre><code>$ java -jar flexgp.jar -train path_to_redWine_data -minutes 60 
 $ java -jar flexgp.jar -train path_to_whiteWine_data -minutes 60 
 </code></pre>
 
-<p>At the end of both runs we measure the accuracy of the most accurate, least complex and knee models and the fused Pareto Front Model:</p>
+<p>At the end of both runs we measure the accuracy of the most accurate, 
+least complex and knee models and the fused Pareto Front Model:</p>
 
 <h2><a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Red wine dataset</h2>
 
@@ -107,8 +107,9 @@ $ head -n 200000 kaggle.data > reducedKaggle.data
 $ less reducedKaggle.data | grep -v NaN > cleanKaggle.data
 </code></pre>
 
-The proposed challenge consist in predicting the bond price given in the third column. Note that columns 1 and 2
- correspond to nominal values and thus should be ignored. In FlexGP the targets need to be stored in the last column, therefore, we extract the targets and save them to a different file:
+The proposed challenge consists in predicting the bond price given in the third column. Note that columns 1 and 2
+ correspond to nominal values and thus should be ignored. Also, the targets need to be stored in the last column, 
+ therefore, we extract the targets and save them in a different file:
 <pre><code>
 $ cut -d, -f3 cleanKaggle.data  > targets.data
 </code></pre>
@@ -155,12 +156,12 @@ $ MSE: 0.9488
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>NOx Emissions dataset</h1>
 
-The data is split into training and test set. We first model retrieve models from the training set: 
+The data is split into training and test set. We first retrieve models from the training set: 
 <pre><code>
 $ java -jar flexgp.jar -train path_to_NOx_train_data -minutes 60 
 </code></pre>
 
-The models obtained from the training set are then tested on the test set:
+Then, the obtained models are tested on the test set:
 <pre><code>
 $ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -scaled knee.txt 
 $ KNEE MODEL: (0.3503123449969823 .* (* (- X6 (* X11 (* X11 (- (- (* X18 X11) (- X13 X9)) X14)))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (* X14 X13)) (mysqrt (mysqrt X3))) (square (- (cube X15) X3)))))) + 0.0666665555347619
@@ -190,16 +191,20 @@ $ MSE: 0.0395
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Million Song Dataset dataset</h1>
 
-The Million Song Dataset year prediction challenge is a regression problem in which the goal is to predict the year in which a given song was released. The dataset is composed of more than 500K songs, each described with a set of 90 features. 
+The Million Song Dataset year prediction challenge is a regression problem in which the release year of the songs has to be predicted.
+The dataset is composed of more than 500K songs, each described with a set of 90 features.
 
-The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account to perform the data split. We first model retrieve models from the training set. In the following example an 8-threaded C++ optimized evaluation is employed:
+The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account
+to perform the data split. We first retrieve models from the training set. 
+In the following example an 8-threaded C++ optimized evaluation is employed:
 <pre><code>
 $ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 -cpp 8
 </code></pre>
-In this example, 306 generations were executed with a population size of 1000. Therefore, 306(generations)*1000(population size)*370K(exemplars) = 1.13x10^11 model evaluations were performed in the process. 
+In this example, 306 generations were executed with a population size of 1000. 
+Therefore, 306(generations)*1000(population size)*370K(exemplars) = 1.13x10^11 model evaluations 
+were performed in the process. 
 
-
-The models obtained from the training set are then tested on the test set:
+The obtained models are then tested on unseen data:
 
 <pre><code>
 $ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled knee.txt 

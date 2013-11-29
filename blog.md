@@ -45,23 +45,54 @@
 $ java -jar flexgp.jar -train path_to_whiteWine_data -minutes 60 
 </code></pre>
 
-<p>At the end of both runs we measure the accuracy of the most accurate models and the fused Pareto Front Model:</p>
+<p>At the end of both runs we measure the accuracy of the most accurate, least complex and knee models and the fused Pareto Front Model:</p>
 
 <h2>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Red wine dataset</h2>
 
-<pre><code>$ java -jar flexgp.jar -test path_to_NOx_data -integer false -scaled mostAccurate.txt 
-$ java -jar flexgp.jar -test path_to_redWine_data -integer false -fused pareto.txt 
+<pre><code>$ java -jar flexgp.jar -test path_to_redWine_data -integer false -scaled knee.txt 
+$ KNEE MODEL: (0.2091043529058974 .* (- (+ (- (- (- (- (- (- X11 (mydivide (+ X3 X9) X10)) X2) (exp X10)) X2) (log X5)) (mydivide (cos (exp X3)) (- X7 X1))) (- X11 (exp X2))) (mydivide (- (+ (- (- (- (mydivide (- (- X11 (exp (cos (+ X11 X9)))) X9) X10) (mydivide (mysqrt X1) X10)) (exp (sin X1))) (mydivide X11 (mydivide X9 (sin X4)))) X11) (mydivide (- (- (- X6 (mydivide (- (- (- X7 X1) X1) X6) (mydivide (square X2) X10))) X9) (mydivide X11 (sin X4))) X7)) X1))) + 3.2310360388920216
+$ MSE: 0.4803
 </code></pre>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_redWine_data -integer false -scaled leastComplex.txt 
+$ LEAST COMPLEX MODEL: (-0.3019831257873804 .* X9) + 6.6359228267589190
+$ MSE: 0.7874
+</code></pre>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_redWine_data -integer false -scaled mostAccurate.txt 
+$ MSE: 0.4490
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_redWine_data -integer false -fused pareto.txt
+$ MSE: 0.4459
+</code></pre>
+
 
 <h2>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>White wine dataset</h2>
 
-<pre><code>$ java -jar flexgp.jar -test path_to_NOx_data -integer false -scaled mostAccurate.txt 
-$ java -jar flexgp.jar -test path_to_whiteWine_data -integer false -fused pareto.txt 
+
+<pre><code>$ java -jar flexgp.jar -test path_to_whiteWine_data -integer false -scaled knee.txt 
+$ KNEE MODEL: (1.7144450089364918 .* (mydivide (* (cos X11) X2) (mysqrt (sin (* X9 X10))))) + 6.0085077197027010 
+$ MSE: 0.7134
 </code></pre>
 
+<pre><code>$ java -jar flexgp.jar -test path_to_whiteWine_data -integer false -scaled leastComplex.txt 
+$ LEAST COMPLEX MODEL: (0.5831540037037669 .* X9) + 4.0186588950880970
+$ MSE: 0.7991
 
+</code></pre>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_whiteWine_data -integer false -scaled mostAccurate.txt 
+$ MSE: 0.7013
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_whiteWine_data -integer false -fused pareto.txt
+$ MSE: 0.7013
+</code></pre>
 
 
 <h1>

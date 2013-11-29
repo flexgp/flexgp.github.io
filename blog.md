@@ -134,7 +134,7 @@ $ java -jar flexgp.jar -test path_to_msd_test_data -integer false -fused pareto.
 
 
 <h1>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h1>
+<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support</h1>
 
 <p>The <a href="index.html">FlexGP project</a> has been developed by the Any-scale Learning For All (ALFA) group at MIT. Please contact us at: <a href="mailto:flexgp@csail.mit.edu">flexgp@csail.mit.edu</a> </p>
 

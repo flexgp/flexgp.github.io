@@ -91,7 +91,7 @@ $ MSE: 0.7013
 </code></pre>
 
 <pre><code>
-$ java -jar flexgp.jar -test path_to_whiteWine_data -integer false -fused fusedModel.txt
+$ java -jar flexgp.jar -test path_to_whiteWine_data -integer true -fused fusedModel.txt
 $ MSE: 0.7013
 </code></pre>
 
@@ -101,31 +101,54 @@ $ MSE: 0.7013
 <h1> <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Kaggle bond price dataset</h1>
 
 Some preprocessing steps are required in this case to adapt the data to a format compatible with FlexGP. We first reduce the kaggle dataset available at by taking the first 200K lines:
-<pre><code>$ head -n 200000 kaggle.data > reducedKaggle.data 
+<pre><code>
+$ head -n 200000 kaggle.data > reducedKaggle.data 
 </code></pre>
 
 We then remove all the lines containing NaN values:
-<pre><code>$ less reducedKaggle.data | grep -v NaN > cleanKaggle.data
+<pre><code>
+$ less reducedKaggle.data | grep -v NaN > cleanKaggle.data
 </code></pre>
 
 The proposed challenge is to predict the bond price given in the third column. Note that columns 1 and 2 coresspond to id nominal values and this should be ignored. In FlexGP the targets need to be stored in the last column, therefore, we extract the targets and save them to a different file:
-<pre><code>$ cut -d, -f3 cleanKaggle.data  > targets.data
+<pre><code>
+$ cut -d, -f3 cleanKaggle.data  > targets.data
 </code></pre>
 
-We then remove the first, second, and third columns of the dataset and paste the targets in the last column of the dataset:
-<pre><code>$ cut --complement -d, -f1,2,3 cleanKaggle.data  > cleanColsKaggle.data
+We then remove the first, second, and third columns of the dataset and paste the targets in the last column of the dataset. The result is a 195458 exemplars dataset, each counting 58 explanatory variables plus a target value.
+<pre><code>
+$ cut --complement -d, -f1,2,3 cleanKaggle.data  > cleanColsKaggle.data
 $ paste -d, cleanColsKaggle.data  targets.data > finalKaggle.data
 </code></pre>
 
 Finally, we employ FlexGP to model the data. In this case, the -cpp flag is employed, thus enabling the optimized C++ evaluation of candidate solutions. In the example below, 4 threads are used to speedup the process:
-<pre><code>$ java -jar flexgp.jar -train path_to_kaggle_data -minutes 60 -cpp 4
+<pre><code>
+$ java -jar flexgp.jar -train path_to_kaggle_data -minutes 60 -cpp 4
 </code></pre>
 
-<p>At the end of the run we measure the accuracy of the most accurate model and the fused Pareto Front Model:</p>
+<p>At the end of the run we measure the accuracy of the knee, least complex and most accurate models and the fused Pareto Front Model:</p>
 
+<pre><code>
+$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled knee.txt 
+$ KNEE MODEL: 
+$ MSE: 
+</code></pre>
 
-<pre><code>$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled mostAccurate.txt 
-$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -fused fusedModel.txt 
+<pre><code>
+$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled leastComplex.txt 
+$ LEAST COMPLEX MODEL: 
+$ MSE: 
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled mostAccurate.txt 
+$ MOST ACCURATE MODEL: 
+$ MSE: 
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -fused fusedModel.txt
+$ MSE: 
 </code></pre>
 
 
@@ -193,7 +216,7 @@ $ MSE: 119.4283
 </code></pre>
 
 <pre><code>
-$ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -scaled mostAccurate.txt 
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled mostAccurate.txt 
 $ MOST ACCURATE MODEL: (0.0027921800501645 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ (+ X15 X6) X3) (+ X6 X18)) (+ (+ (+ (+ X6 X6) (+ X6 (+ X6 X89))) (+ X6 X6)) (+ (+ (+ X6 X6) X80) X6)))) (+ (+ X6 X3) (+ (+ (+ (+ (+ (+ X15 X6) (+ (+ X6 (+ X6 X6)) X18)) (+ (+ X6 X6) (+ X6 X18))) X16) (+ X18 (+ (+ (+ (+ X6 X6) X18) (+ X3 (+ X6 X6))) (+ X71 (+ X3 X16))))) (+ X18 (+ (+ (+ (+ X6 X6) (+ (+ X6 X6) (+ (+ X6 (+ X6 X6)) (+ (+ (+ (+ (+ X3 (+ (+ X6 X6) X6)) (+ (+ X6 X2) X18)) (+ X6 X6)) X6) (+ X6 (+ X80 X18)))))) (+ (+ X3 (+ X6 X6)) (+ (+ X6 X2) X18))) (+ (+ X6 (+ X3 (+ (+ X6 X6) (+ X6 (+ X6 X3))))) X6))))))) + 1994.4200439453125000
 $ MSE: 112.2870
 </code></pre>

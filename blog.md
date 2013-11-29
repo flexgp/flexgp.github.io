@@ -65,14 +65,14 @@ $ java -jar flexgp.jar -test path_to_whiteWine_data -integer false -fused pareto
 
 
 <h1>
-<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Kaggle bond Price dataset</h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Kaggle bond price dataset</h1>
 
 Some preprocessing steps are required in this case to adapt the data to a format compatible with FlexGP. We first reduce the kaggle dataset available at by taking the first 200K lines:
 <pre><code>$ head -n 200000 kaggle.data > reducedKaggle.data 
 </code></pre>
 
 We then remove all the lines containing NaN values:
-<pre><code>$ less reducedKaggle.data | grep -v Nan > cleanKaggle.data
+<pre><code>$ less reducedKaggle.data | grep -v NaN > cleanKaggle.data
 </code></pre>
 
 The proposed challenge is to predict the bond price given in the third column. Note that columns 1 and 2 coresspond to id nominal values and this should be ignored. In FlexGP the targets need to be stored in the last column, therefore, we extract the targets and save them to a different file:

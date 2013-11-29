@@ -171,19 +171,37 @@ $ MSE: 0.0395
 
 The Million Song Dataset year prediction challenge is a regression problem in which the goal is to predict the year in which a given song was released. The dataset is composed of more than 500K songs, each described with a set of 90 features. 
 
-The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account to perform the data split. data is split into training and test set:
-<pre><code>$ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 -cpp 8
-$ java -jar flexgp.jar -test path_to_msd_test_data -integer false -scaled mostAccurate.txt 
-$ java -jar flexgp.jar -test path_to_msd_test_data -integer false -fused pareto.txt 
+The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account to perform the data split. We first model retrieve models from the training set. In the following example an 8-threaded C++ optimized evaluation is employed:
+<pre><code>
+$ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 -cpp 8
+</code></pre>
+In this example, 306 generations were executed with a population size of 1000. Therefore, 306(generations)*1000(population size)*370K(exemplars) = 1.13x10^11 model evaluations were performed in the process. 
+
+
+The models obtained from the training set are then tested on the test set:
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled knee.txt 
+$ KNEE MODEL: (0.0041587599553168 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ X15 X3) (+ X6 X18)) (+ X6 X6))) (+ (+ X6 (+ X6 X3)) (+ (+ (+ X6 (+ X15 X6)) (+ X18 (+ X6 (+ X71 X6)))) (+ (+ X6 X6) (+ X6 X18)))))) + 1994.8900146484375000
+$ MSE: 113.9947
 </code></pre>
 
+<pre><code>
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled leastComplex.txt 
+$ LEAST COMPLEX MODEL: (-0.0002395899937255 .* X78) + 1995.7399902343750000
+$ MSE: 119.4283
+</code></pre>
 
+<pre><code>
+$ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -scaled mostAccurate.txt 
+$ MOST ACCURATE MODEL: (0.0027921800501645 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ (+ X15 X6) X3) (+ X6 X18)) (+ (+ (+ (+ X6 X6) (+ X6 (+ X6 X89))) (+ X6 X6)) (+ (+ (+ X6 X6) X80) X6)))) (+ (+ X6 X3) (+ (+ (+ (+ (+ (+ X15 X6) (+ (+ X6 (+ X6 X6)) X18)) (+ (+ X6 X6) (+ X6 X18))) X16) (+ X18 (+ (+ (+ (+ X6 X6) X18) (+ X3 (+ X6 X6))) (+ X71 (+ X3 X16))))) (+ X18 (+ (+ (+ (+ X6 X6) (+ (+ X6 X6) (+ (+ X6 (+ X6 X6)) (+ (+ (+ (+ (+ X3 (+ (+ X6 X6) X6)) (+ (+ X6 X2) X18)) (+ X6 X6)) X6) (+ X6 (+ X80 X18)))))) (+ (+ X3 (+ X6 X6)) (+ (+ X6 X2) X18))) (+ (+ X6 (+ X3 (+ (+ X6 X6) (+ X6 (+ X6 X3))))) X6))))))) + 1994.4200439453125000
+$ MSE: 112.2870
+</code></pre>
 
-
-
-
-
-
+<pre><code>
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -fused fusedModel.txt
+$ MSE: 112.3031
+</code></pre>
 
 
 

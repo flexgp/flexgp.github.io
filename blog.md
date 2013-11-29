@@ -20,7 +20,7 @@
     <header>
       <div class="inner">
         <h1>Flexgp.github.io</h1>
-        <h2>Tutorial and Blog</h2>
+        <h2>FlexGP Blog</h2>
         <a href="https://github.com/flexgp" class="button"><small>Follow me on</small>GitHub</a>
       </div>
     </header>
@@ -29,93 +29,212 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a name="welcome-to-flexgp" class="anchor" href="#welcome-to-flexgp"><span class="octicon octicon-link"></span></a>Welcome to FlexGP</h1>
+<a name="welcome-to-flexgp" class="anchor" href="#welcome-to-flexgp"><span class="octicon octicon-link"></span></a>Welcome to the FlexGP blog</h1>
 
-<p>FlexGP is a Evolutionary Computation framework aimed at data modeling and knowledge discovery. Current release provides functionality both for modeling data and for testing the retrieved models. In this website we provide a quick tutorial to get started and model your data.</p>
+<p>In this blog we will report the results obtained with the FlexGP data modeler for several datasets.</p>
 
-<h1>
-<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Tutorial</h1>
 
-<h2>
-<a name="step-1-downloading-the-source-code" class="anchor" href="#step-1-downloading-the-source-code"><span class="octicon octicon-link"></span></a>Step 1: Downloading the source code</h2>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<h2>
-<a name="step-2-running-flexgp" class="anchor" href="#step-2-running-flexgp"><span class="octicon octicon-link"></span></a>Step 2: Running FlexGP</h2>
-
-<p>It is possible to run FlexGP directly from your terminal or from Matlab</p>
-
-<h3>
-<a name="running-flexgp-from-the-terminal" class="anchor" href="#running-flexgp-from-the-terminal"><span class="octicon octicon-link"></span></a>Running FlexGP from the terminal</h3>
-
-<h4>
-<a name="model-the-data" class="anchor" href="#model-the-data"><span class="octicon octicon-link"></span></a>Model the data</h4>
-
-<p>All you need to provide is the path to your dataset and the optimization time</p>
-
-<pre><code>$ java -jar flexgp.jar -train path_to_your_data -minutes 10 
-</code></pre>
-
-<p>At the end of the run a set of files are generated:</p>
-
-<ol>
-<li><p><strong>pareto.txt</strong>: models forming the Pareto Front (accuracy vs model complexity).</p></li>
-<li><p><strong>leastComplex.txt</strong>: least complex model of the Pareto Front.</p></li>
-<li><p><strong>mostAccurate.txt</strong>: most accurate model of the Pareto Front.</p></li>
-<li><p><strong>knee.txt</strong>: model at the knee of the Pareto Front.</p></li>
-<li><p><strong>bestModelGeneration.txt</strong>: most accurate model per generation.</p></li>
-<li><p><strong>fusedModel.txt</strong>: fused model of the Pareto Front obtained with Adaptive Regression by Mixing (see <em>Adaptive Regression by Mixing. Yuhong Yang. Journal of the American Statistical Association Vol. 96, No. 454 (Jun., 2001), pp. 574-588</em>).</p></li>
-</ol><h4>
-<a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test the models</h4>
-
-<p>Once the modeling is finished, it is possible to obtain the Mean Squared Error (MSE) of the models in files 1) to 5) with </p>
-
-<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer true -scaled model_file 
-</code></pre>
-
-<p>To obtain the MSE of the fused model of the Pareto Front:</p>
-
-<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer false -fused model_file 
-</code></pre>
-
-<p>The <em>-integer</em> flag indicated whether the target values are integer or floating point values. </p>
-
-<h3>
-<a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link"></span></a>Running FlexGP from Matlab</h3>
-
-<h2>
-<a name="step-3-speeding-up-your-runs-with-c-optimized-execution" class="anchor" href="#step-3-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon octicon-link"></span></a>Step 3: Speeding up your runs with C++ optimized execution</h2>
-
-<p>This option is only supported for Linux Debian platforms and requires the gcc and g++ compilers:</p>
-
-<pre><code>$ sudo apt-get install gcc
-$ sudo apt-get install g++
-</code></pre>
-
-<p>Modify the Linux kernel parameter governing the shared memory size to be at least as large as the data being analyzed, in the next example we set it to 2GB</p>
-
-<pre><code>$ echo 2147483648 &gt; /proc/sys/kernel/shmmax
-</code></pre>
-
-<pre><code>$ sudo nano /sys/kernel/shmmax 
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
 
 <h1>
-<a name="results" class="anchor" href="#results"><span class="octicon octicon-link"></span></a>Results</h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Wine quality dataset</h1>
 
-<p>To check reports visit our blog:
-<a href="blog.html">FlexGP Blog</a></p>
+<p>This problem consists in modeling the quality of a given red or white wine given 11 features such as acidity, alcohol degree etc.</p>
+
+<pre><code>$ java -jar flexgp.jar -train path_to_redWine_data -minutes 60 
+$ java -jar flexgp.jar -train path_to_whiteWine_data -minutes 60 
+</code></pre>
+
+<p>At the end of both runs we measure the accuracy of the most accurate, least complex and knee models and the fused Pareto Front Model:</p>
+
+<h2><a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Red wine dataset</h2>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_redWine_data -integer true -scaled knee.txt 
+$ KNEE MODEL: (0.2091043529058974 .* (- (+ (- (- (- (- (- (- X11 (mydivide (+ X3 X9) X10)) X2) (exp X10)) X2) (log X5)) (mydivide (cos (exp X3)) (- X7 X1))) (- X11 (exp X2))) (mydivide (- (+ (- (- (- (mydivide (- (- X11 (exp (cos (+ X11 X9)))) X9) X10) (mydivide (mysqrt X1) X10)) (exp (sin X1))) (mydivide X11 (mydivide X9 (sin X4)))) X11) (mydivide (- (- (- X6 (mydivide (- (- (- X7 X1) X1) X6) (mydivide (square X2) X10))) X9) (mydivide X11 (sin X4))) X7)) X1))) + 3.2310360388920216
+$ MSE: 0.4803
+</code></pre>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_redWine_data -integer true -scaled leastComplex.txt 
+$ LEAST COMPLEX MODEL: (-0.3019831257873804 .* X9) + 6.6359228267589190
+$ MSE: 0.7874
+</code></pre>
+
+<pre><code>$ java -jar flexgp.jar -test path_to_redWine_data -integer true -scaled mostAccurate.txt 
+$ MOST ACCURATE MODEL: (0.2146726201717735 .* (- (- (+ (- (- (- (- (- (- (- (- (- X11 (mydivide X9 X10)) X2) (exp X10)) (exp X2)) (+ X5 X9)) X3) X5) X2) (mydivide (cos (+ X3 X8)) (- X7 X1))) X11) (mydivide (- (+ (- (- (- (- (- (- (- (mydivide (- (- X11 (exp (cos (- (- (- (- (- (mydivide (- (- X11 (exp (cos (+ X11 X11)))) X9) X10) (mydivide X9 X10)) X2) (mydivide (- (- (- (- (- (- (sin X4) (mydivide (- (- (- (mydivide (- (- (mydivide (- (- X11 (exp (cos (+ X11 X11)))) X9) X10) (exp X2)) (mydivide (square X2) X10)) X10) X1) X10) (sin X1)) X2)) (log (mydivide (- X2 (mydivide (- (- (- (- (- (mydivide (- (- X11 (exp (cos (+ X9 X9)))) X9) X10) (mydivide X9 X10)) (sin X4)) X5) (mydivide (quart X2) X10)) (sin X1)) X2)) X1))) (exp (mysqrt (- X11 (mydivide X4 (- X2 (mydivide X11 X3))))))) (- X4 X1)) X6) (- X8 X11)) X6)) (mydivide X9 X10)) (sin X1))))) X9) X10) (mydivide X9 X10)) (exp (cos (- (- (- (- (- (mydivide (- (- X11 (exp (cos (+ X11 X11)))) X9) X10) (mydivide X9 X10)) X2) (mydivide (- (- (- (- (- (- X2 (mydivide (- (- (- (mydivide (- (- (mydivide (- (- X11 (exp (cos (+ X11 X11)))) X9) X10) (exp X2)) (mydivide (square X2) X10)) X10) X1) X10) (sin X1)) X2)) (log (quart X2))) (exp (mysqrt (- X11 (mydivide X4 (- X2 (mydivide (square X2) X3))))))) (- X4 X1)) X6) (- (sin X5) X11)) X6)) (mydivide X9 X10)) (sin X1))))) (mydivide (- (- (- (- (- (- (mydivide X8 (- (- X11 X5) X1)) (mydivide (- (- (- (mydivide (- (- (mydivide (- (- X11 (exp (cos (+ X11 X11)))) X9) X10) (exp (sin X1))) (cos (+ X11 X11))) X10) X1) X10) X2) X2)) (log (mydivide (- (- (- (mydivide (- (- (mydivide (- (- (mydivide (- (mydivide (- (mydivide X9 (log X10)) (cos (+ X11 X10))) X2) X1) X2) (exp (mydivide (- X1 (mydivide (- X11 (mydivide X7 (sin (mydivide (- (- X11 (log (mydivide (- X2 (- X11 (mydivide X5 (exp (- X7 X10))))) X1))) (exp (mysqrt (- X11 (mydivide X4 (- (+ X11 (- (+ X11 X9) X6)) (mydivide X11 X3))))))) X6)))) (exp X2))) X1))) (log (- (+ X11 X11) (mydivide (- X11 (quart X2)) X3)))) X11) X9) X2) X10) X1) X3) (mydivide (- (- (cos (+ X11 X6)) (mydivide X7 (mydivide X3 (exp (- X7 X1))))) X11) X10)) X3))) (exp (mysqrt (- X11 (mydivide (mydivide X9 (cos (log (mydivide X3 (exp (- X7 X1)))))) (- (+ X11 (- X5 X6)) (mydivide X11 X3))))))) (- (- (- X10 (mydivide X3 X10)) X10) X1)) X6) (- X5 X11)) X6)) (mydivide (+ (sin X1) X9) X10)) (sin (- (- (mydivide (- (mydivide X9 X10) (square X2)) X2) X1) X3))) (log (- (+ X11 X11) (mydivide (- X11 (quart X2)) X3)))) (mydivide (cos (mydivide (cos (+ X3 X8)) (- X7 X1))) (- X7 X1))) X11) (mydivide (- (- (- (- (- (- (mydivide X7 (- (- (- X10 X1) (mydivide (- (- X5 (- X8 X11)) X6) (mydivide (square X2) X10))) X4)) (mydivide (- (- X3 (- (- X11 (mydivide X9 X2)) (- (- X5 X11) X6))) X1) X2)) (mydivide (- (- (- (- X7 X11) X1) X6) X2) (mydivide (square X2) X10))) X2) X11) (mydivide X3 (exp (- X7 X1)))) (mydivide (mydivide (- (- (- (mydivide (- (mydivide X9 X10) (square X2)) X2) X1) (+ X3 X2)) (- (- (- (- (- (- (- (- (- X11 (mydivide (+ X5 X9) X10)) (exp X2)) (exp X2)) X2) (+ X5 X9)) (quart X3)) X3) X2) (mydivide (- (- (+ (- (- (- (- (- (- (- (- (- X11 X10) X2) (exp X10)) (exp X2)) (+ X5 X9)) X3) X5) X2) (mydivide (cos (exp X3)) (- X7 X1))) X11) (mydivide (- (+ (- (- (- (- (- (- (- (- (mydivide (- (- X11 (exp (cos (+ X11 X9)))) (exp (sin X1))) X10) (sin X2)) (mydivide X9 X10)) X2) (mydivide (- (- (- (- (mydivide X8 (- (- X11 X5) X1)) (mydivide (- (- (- (mydivide X11 X10) X1) X9) X6) X2)) X2) X2) X11) X6)) (mydivide X9 X10)) (sin (- X4 X1))) (log (- (+ X11 X11) (mydivide X11 X3)))) (mydivide (cos (mydivide (cos (+ X3 X8)) (- X7 X1))) (- X11 X1))) X11) (mydivide (- (- (- (- (- X1 (mydivide (- (- (- (- X7 X1) X11) X6) X2) (mydivide (square X2) (cos (log X10))))) X11) (mydivide (+ X3 X9) X10)) (mydivide X3 (exp (- X7 X1)))) (mydivide (mydivide (- (mydivide (- (mydivide X9 X10) (cos X1)) X2) X1) X2) (sin X4))) X7)) X1)) X2) (- X7 (- X7 X1))))) X2) (sin X4))) X7)) X1)) X2)) + 4.3779292710659720
+$ MSE: 0.4490
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_redWine_data -integer true -fused fusedModel.txt
+$ MSE: 0.4459
+</code></pre>
+
+
+<h2> <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>White wine dataset</h2>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_whiteWine_data -integer true -scaled knee.txt 
+$ KNEE MODEL: (1.7144450089364918 .* (mydivide (* (cos X11) X2) (mysqrt (sin (* X9 X10))))) + 6.0085077197027010 
+$ MSE: 0.7134
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_whiteWine_data -integer true -scaled leastComplex.txt 
+$ LEAST COMPLEX MODEL: (0.5831540037037669 .* X9) + 4.0186588950880970
+$ MSE: 0.7991
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_whiteWine_data -integer true -scaled mostAccurate.txt 
+$ MOST ACCURATE MODEL: (1.4859603473683902 .* (mydivide (* (cos X11) (sin X2)) (sin (mysqrt (sin (sin (mydivide (* (cos (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (mysqrt (sin (sin (sin (sin (sin (mysqrt (mysqrt (mysqrt (mysqrt (sin (log (sin (sin (sin (sin (sin (sin (sin (mysqrt X3))))))))))))))))))))))))))))))))))) (sin (sin (sin (sin (exp (log (sin (sin (sin (sin (sin (sin (sin (sin (mysqrt X3)))))))))))))))) (mysqrt X5)))))))) + 6.0163580514028405
+$ MSE: 0.7013
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_whiteWine_data -integer true -fused fusedModel.txt
+$ MSE: 0.7013
+</code></pre>
+
+
+
+
+<h1> <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Kaggle bond price dataset</h1>
+
+Some preprocessing steps are required in this case to adapt the data to a format compatible with FlexGP. We first reduce the kaggle dataset available at by taking the first 200K lines:
+<pre><code>
+$ head -n 200000 kaggle.data > reducedKaggle.data 
+</code></pre>
+
+We then remove all the lines containing NaN values:
+<pre><code>
+$ less reducedKaggle.data | grep -v NaN > cleanKaggle.data
+</code></pre>
+
+The proposed challenge is to predict the bond price given in the third column. Note that columns 1 and 2 coresspond to id nominal values and this should be ignored. In FlexGP the targets need to be stored in the last column, therefore, we extract the targets and save them to a different file:
+<pre><code>
+$ cut -d, -f3 cleanKaggle.data  > targets.data
+</code></pre>
+
+We then remove the first, second, and third columns of the dataset and paste the targets in the last column of the dataset. The result is a 195458 exemplars dataset, each counting 58 explanatory variables plus a target value.
+<pre><code>
+$ cut --complement -d, -f1,2,3 cleanKaggle.data  > cleanColsKaggle.data
+$ paste -d, cleanColsKaggle.data  targets.data > finalKaggle.data
+</code></pre>
+
+Finally, we employ FlexGP to model the data. In this case, the -cpp flag is employed, thus enabling the optimized C++ evaluation of candidate solutions. In the example below, 4 threads are used to speedup the process:
+<pre><code>
+$ java -jar flexgp.jar -train path_to_kaggle_data -minutes 60 -cpp 4
+</code></pre>
+
+<p>At the end of the run we measure the accuracy of the knee, least complex and most accurate models and the fused Pareto Front Model:</p>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled knee.txt 
+$ KNEE MODEL: (0.0986682027578354 .* (+ (+ (+ (+ X20 X10) X50) (+ (mysqrt X30) (mysqrt X30))) (+ (+ X8 (+ X15 X10)) (+ (+ (+ X8 X10) X7) (+ X35 X10))))) + -0.9139559864997864
+$ MSE: 0.9568
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled leastComplex.txt 
+$ LEAST COMPLEX MODEL: (0.9925869703292847 .* X10) + 0.7772449851036072
+$ MSE: 1.3072
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled mostAccurate.txt 
+$ MOST ACCURATE MODEL: (0.0249582007527351 .* (+ (+ (+ X25 (+ (+ (+ X8 (+ X55 (+ X8 (+ (+ X12 X30) (+ (+ X10 (+ (mysqrt X10) X10)) (+ (mysqrt (+ X35 (square X12))) (+ (mysqrt X35) X10))))))) (+ (mysqrt (+ X45 X50)) (+ X7 (+ (mysqrt X8) (sin (mysqrt X20)))))) X10)) X50) (+ (+ (+ X35 (+ (+ X15 (+ X7 (mysqrt (+ X15 X3)))) (+ (+ (+ (mysqrt (+ X10 X10)) (+ (+ (+ X8 (+ X55 (+ X8 (+ (+ X12 X30) X10)))) (+ (mysqrt (+ X3 X10)) X10)) X10)) X50) (+ (+ (+ (sin X7) (+ X15 (+ X7 (mysqrt X20)))) X40) (+ (+ X4 (+ (+ X20 (+ (mysqrt X10) (mysqrt X10))) (+ (mysqrt X10) X10))) (+ (+ (+ (+ X8 (+ X10 (mysqrt (+ X15 (+ (mysqrt X10) X50))))) X15) (+ (mysqrt X10) (+ X7 X10))) (+ (mysqrt X7) (+ X7 X10)))))))) X40) (+ (+ X20 (+ (+ X20 (mysqrt (+ (+ (+ X55 (+ X15 X3)) X15) X8))) X8)) (+ (+ (+ (+ X8 (+ X10 (mysqrt (+ X15 X3)))) (+ X10 X10)) (+ (mysqrt (+ X8 (+ X15 X10))) (+ X7 X10))) X10))))) + -2.9934198856353760
+$ MSE: 0.9459
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_kaggle_data -integer false -fused fusedModel.txt
+$ MSE: 0.9488
+</code></pre>
+
+
+
 
 <h1>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>NOx Emissions dataset</h1>
 
-<p>This page has been created by the Any-scale Learning For All (ALFA) group at MIT. Please contact us at: <a href="mailto:flexgp@csail.mit.edu">flexgp@csail.mit.edu</a> </p>
+The data is split into training and test set. We first model retrieve models from the training set: 
+<pre><code>
+$ java -jar flexgp.jar -train path_to_NOx_train_data -minutes 60 
+</code></pre>
+
+The models obtained from the training set are then tested on the test set:
+<pre><code>
+$ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -scaled knee.txt 
+$ KNEE MODEL: (0.3503123449969823 .* (* (- X6 (* X11 (* X11 (- (- (* X18 X11) (- X13 X9)) X14)))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (* X14 X13)) (mysqrt (mysqrt X3))) (square (- (cube X15) X3)))))) + 0.0666665555347619
+$ MSE: 0.0387
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -scaled leastComplex.txt 
+$ LEAST COMPLEX MODEL: (0.3588259382986629 .* X13) + 0.0677718532771849
+$ MSE: 0.0567
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -scaled mostAccurate.txt 
+$ MOST ACCURATE MODEL: (0.3293701574352099 .* (* (- X6 (* X11 (* X11 (* X11 (sin (sin (- (- X18 (- X13 X9)) X14))))))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (- (mysqrt (mysqrt (- (* (- X13 (* X12 (mysqrt (- (cube (* (exp (quart (square X6))) (sin (- X4 (+ (- (- (- X14 (- (- (* (- X18 (- X13 (mysqrt (mysqrt (- (cube X6) X12))))) (- (* X13 (cube X6)) (+ (- X12 X11) (+ (- X12 X13) (square X9))))) (* (mysqrt (- (cube X15) (- (square X9) (* X14 X13)))) X18)) (* X14 X13))) (cube (- X6 (sin (- X18 X13))))) X6) X12))))) X12)))) (- (* X14 (sin (- (mysqrt X6) (+ (- (- (quart X14) (cube (- X6 (sin (- X18 (square X9)))))) X9) (square X13))))) (+ (- X12 (mysqrt X13)) (square X9)))) (* X11 (* X11 (* X6 (sin (sin (sin X18))))))))) (- (square X9) (* X14 X13)))) (mysqrt (- X6 X3))) (square (- (cube X15) X3)))))) + 0.0512241480213157
+$ MSE: 0.0362
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_NOx_test_data -integer false -fused fusedModel.txt
+$ MSE: 0.0395
+</code></pre>
+
+
+
+
+<h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Million Song Dataset dataset</h1>
+
+The Million Song Dataset year prediction challenge is a regression problem in which the goal is to predict the year in which a given song was released. The dataset is composed of more than 500K songs, each described with a set of 90 features. 
+
+The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account to perform the data split. We first model retrieve models from the training set. In the following example an 8-threaded C++ optimized evaluation is employed:
+<pre><code>
+$ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 -cpp 8
+</code></pre>
+In this example, 306 generations were executed with a population size of 1000. Therefore, 306(generations)*1000(population size)*370K(exemplars) = 1.13x10^11 model evaluations were performed in the process. 
+
+
+The models obtained from the training set are then tested on the test set:
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled knee.txt 
+$ KNEE MODEL: (0.0041587599553168 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ X15 X3) (+ X6 X18)) (+ X6 X6))) (+ (+ X6 (+ X6 X3)) (+ (+ (+ X6 (+ X15 X6)) (+ X18 (+ X6 (+ X71 X6)))) (+ (+ X6 X6) (+ X6 X18)))))) + 1994.8900146484375000
+$ MSE: 113.9947
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled leastComplex.txt 
+$ LEAST COMPLEX MODEL: (-0.0002395899937255 .* X78) + 1995.7399902343750000
+$ MSE: 119.4283
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled mostAccurate.txt 
+$ MOST ACCURATE MODEL: (0.0027921800501645 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ (+ X15 X6) X3) (+ X6 X18)) (+ (+ (+ (+ X6 X6) (+ X6 (+ X6 X89))) (+ X6 X6)) (+ (+ (+ X6 X6) X80) X6)))) (+ (+ X6 X3) (+ (+ (+ (+ (+ (+ X15 X6) (+ (+ X6 (+ X6 X6)) X18)) (+ (+ X6 X6) (+ X6 X18))) X16) (+ X18 (+ (+ (+ (+ X6 X6) X18) (+ X3 (+ X6 X6))) (+ X71 (+ X3 X16))))) (+ X18 (+ (+ (+ (+ X6 X6) (+ (+ X6 X6) (+ (+ X6 (+ X6 X6)) (+ (+ (+ (+ (+ X3 (+ (+ X6 X6) X6)) (+ (+ X6 X2) X18)) (+ X6 X6)) X6) (+ X6 (+ X80 X18)))))) (+ (+ X3 (+ X6 X6)) (+ (+ X6 X2) X18))) (+ (+ X6 (+ X3 (+ (+ X6 X6) (+ X6 (+ X6 X3))))) X6))))))) + 1994.4200439453125000
+$ MSE: 112.2870
+</code></pre>
+
+<pre><code>
+$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -fused fusedModel.txt
+$ MSE: 112.3031
+</code></pre>
+
+
+
+
+
+
+<h1>
+<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support</h1>
+
+<p>The <a href="index.html">FlexGP project</a> has been developed by the Any-scale Learning For All (ALFA) group at MIT. Please contact us at: <a href="mailto:flexgp@csail.mit.edu">flexgp@csail.mit.edu</a> </p>
 
 <p>author: <a href="https://github.com/ignacioarnaldo" class="user-mention">@ignacioarnaldo</a></p>
         </section>

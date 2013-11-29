@@ -130,25 +130,25 @@ $ java -jar flexgp.jar -train path_to_kaggle_data -minutes 60 -cpp 4
 
 <pre><code>
 $ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled knee.txt 
-$ KNEE MODEL: 
-$ MSE: 
+$ KNEE MODEL: (0.0986682027578354 .* (+ (+ (+ (+ X20 X10) X50) (+ (mysqrt X30) (mysqrt X30))) (+ (+ X8 (+ X15 X10)) (+ (+ (+ X8 X10) X7) (+ X35 X10))))) + -0.9139559864997864
+$ MSE: 0.9568
 </code></pre>
 
 <pre><code>
 $ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled leastComplex.txt 
-$ LEAST COMPLEX MODEL: 
-$ MSE: 
+$ LEAST COMPLEX MODEL: (0.9925869703292847 .* X10) + 0.7772449851036072
+$ MSE: 1.3072
 </code></pre>
 
 <pre><code>
 $ java -jar flexgp.jar -test path_to_kaggle_data -integer false -scaled mostAccurate.txt 
-$ MOST ACCURATE MODEL: 
-$ MSE: 
+$ MOST ACCURATE MODEL: (0.0249582007527351 .* (+ (+ (+ X25 (+ (+ (+ X8 (+ X55 (+ X8 (+ (+ X12 X30) (+ (+ X10 (+ (mysqrt X10) X10)) (+ (mysqrt (+ X35 (square X12))) (+ (mysqrt X35) X10))))))) (+ (mysqrt (+ X45 X50)) (+ X7 (+ (mysqrt X8) (sin (mysqrt X20)))))) X10)) X50) (+ (+ (+ X35 (+ (+ X15 (+ X7 (mysqrt (+ X15 X3)))) (+ (+ (+ (mysqrt (+ X10 X10)) (+ (+ (+ X8 (+ X55 (+ X8 (+ (+ X12 X30) X10)))) (+ (mysqrt (+ X3 X10)) X10)) X10)) X50) (+ (+ (+ (sin X7) (+ X15 (+ X7 (mysqrt X20)))) X40) (+ (+ X4 (+ (+ X20 (+ (mysqrt X10) (mysqrt X10))) (+ (mysqrt X10) X10))) (+ (+ (+ (+ X8 (+ X10 (mysqrt (+ X15 (+ (mysqrt X10) X50))))) X15) (+ (mysqrt X10) (+ X7 X10))) (+ (mysqrt X7) (+ X7 X10)))))))) X40) (+ (+ X20 (+ (+ X20 (mysqrt (+ (+ (+ X55 (+ X15 X3)) X15) X8))) X8)) (+ (+ (+ (+ X8 (+ X10 (mysqrt (+ X15 X3)))) (+ X10 X10)) (+ (mysqrt (+ X8 (+ X15 X10))) (+ X7 X10))) X10))))) + -2.9934198856353760
+$ MSE: 0.9459
 </code></pre>
 
 <pre><code>
 $ java -jar flexgp.jar -test path_to_kaggle_data -integer false -fused fusedModel.txt
-$ MSE: 
+$ MSE: 0.9488
 </code></pre>
 
 

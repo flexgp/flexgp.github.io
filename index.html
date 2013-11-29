@@ -72,7 +72,7 @@ $ git checkout gh-pages
 </ol><h4>
 <a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test the models</h4>
 
-<p>Once the modeling is finished, it is possible to obtain the Mean Squared Error (MSE) of the models in files 1) to 5) with </p>
+<p>FlexGP provides functionality to obtain the Mean Squared Error (MSE) of the retrieved models once the training is finished. In the examples below, the additional <em>-integer</em> flag indicates whether the targets are integer or floating point values. To test the models saved in files 1) to 5), do:</p>
 
 <pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer true -scaled model_file 
 </code></pre>
@@ -81,8 +81,6 @@ $ git checkout gh-pages
 
 <pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer false -fused model_file 
 </code></pre>
-
-<p>The <em>-integer</em> flag indicated whether the target values are integer or floating point values. </p>
 
 <h3>
 <a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link"></span></a>Running FlexGP from Matlab</h3>
@@ -98,7 +96,7 @@ $ sudo apt-get install g++
 
 <p>Modify the Linux kernel parameter governing the shared memory size to be at least as large as the data being analyzed, in the next example we set it to 2GB</p>
 
-<pre><code>$ echo 2147483648 &gt; /proc/sys/kernel/shmmax
+<pre><code>$ sudo echo 2147483648 &gt; /proc/sys/kernel/shmmax
 </code></pre>
 
 <pre><code>$ sudo nano /sys/kernel/shmmax 

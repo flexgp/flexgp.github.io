@@ -31,7 +31,7 @@
           <h1>
 <a name="welcome-to-flexgp" class="anchor" href="#welcome-to-flexgp"><span class="octicon octicon-link"></span></a>Welcome to FlexGP</h1>
 
-<p>FlexGP is a Evolutionary Computation framework aimed at data modeling and knowledge discovery. Current release provides functionality both for modeling data and for testing the retrieved models. In this website we provide a quick tutorial to get started and model your data.</p>
+<p>FlexGP is a Evolutionary Computation framework aimed at data modeling and knowledge discovery. Current release provides functionality both for modeling data and for testing the retrieved models. In this website we provide a quick tutorial to get started with FlexGP.</p>
 
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Tutorial</h1>
@@ -99,7 +99,7 @@ $ sudo apt-get install g++
 <pre><code>$ sudo echo 2147483648 &gt; /proc/sys/kernel/shmmax
 </code></pre>
 
-<p>To benefit from the optimized C++ evaluation of candidates solutions, just add the -cpp flag added by the number of CPU threads employed for the execution of FlexGP (4 in the example below):</p>
+<p>To benefit from the optimized C++ execution, append the -cpp flag followed by the number of CPU threads that will be employed to speedup FlexGP (4 in the example below):</p>
 
 <pre><code>$ java -jar flexgp.jar -train path_to_your_data -minutes 10 -cpp 4
 </code></pre>

@@ -102,8 +102,11 @@ $ MSE: 0.7013
 
 <h1> <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Kaggle bond price dataset</h1>
 
-This dataset can be downloaded from the <a href="http://www.kaggle.com/c/benchmark-bond-trade-price-challenge">Kaggle bond trade price challenge website</a>. Some preprocessing steps are required in this case to adapt the data to a format compatible with FlexGP. 
-We first reduce the kaggle dataset available at by taking the first 200K lines and remove all the lines containing NaN values:
+This dataset can be downloaded from the <a href="http://www.kaggle.com/c/benchmark-bond-trade-price-challenge">Kaggle 
+bond trade price challenge website</a>. Some preprocessing steps are required in this case to adapt the data to a 
+format compatible with FlexGP. As in the previous example, we first delete the first line containing the labels of the 
+explanatory variables. We then reduce the dataset by taking the first 200K exemplars and removing all the lines 
+containing NaN values:
 <pre><code>
 $ head -n 200000 kaggle.data > reducedKaggle.data 
 $ less reducedKaggle.data | grep -v NaN > cleanKaggle.data
@@ -116,7 +119,8 @@ The proposed challenge consists in predicting the bond price given in the third 
 $ cut -d, -f3 cleanKaggle.data  > targets.data
 </code></pre>
 
-We then remove the first, second, and third columns of the dataset and paste the targets in the last column of the dataset. The result is a 195458 exemplars dataset, each counting 58 explanatory variables plus a target value.
+We then remove the first, second, and third columns of the dataset and paste the targets in the last column of the 
+dataset. The result is a 195458 exemplars dataset, each counting 58 explanatory variables plus a target value.
 <pre><code>
 $ cut --complement -d, -f1,2,3 cleanKaggle.data  > cleanColsKaggle.data
 $ paste -d, cleanColsKaggle.data  targets.data > finalKaggle.data

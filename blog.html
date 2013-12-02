@@ -50,7 +50,9 @@ $ sed -i 's/;/,/g' original_data
 
 Once the data is properly formatted, we run:</p>
 
-<pre><code>$ java -jar flexgp.jar -train path_to_redWine_data -minutes 60 
+<pre><code>$ cd path_to_redWine_folder
+$ java -jar flexgp.jar -train path_to_redWine_data -minutes 60
+$ cd path_to_whiteWine_folder
 $ java -jar flexgp.jar -train path_to_whiteWine_data -minutes 60 
 </code></pre>
 
@@ -58,6 +60,9 @@ $ java -jar flexgp.jar -train path_to_whiteWine_data -minutes 60
 least complex and knee models and the fused Pareto Front Model:</p>
 
 <h2><a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Red wine dataset</h2>
+
+<pre><code>$ cd path_to_redWine_folder
+</code></pre>
 
 <pre><code>$ java -jar flexgp.jar -test path_to_redWine_data -integer true -scaled knee.txt 
 $ KNEE MODEL: (0.2091043529058974 .* (- (+ (- (- (- (- (- (- X11 (mydivide (+ X3 X9) X10)) X2) (exp X10)) X2) (log X5)) (mydivide (cos (exp X3)) (- X7 X1))) (- X11 (exp X2))) (mydivide (- (+ (- (- (- (mydivide (- (- X11 (exp (cos (+ X11 X9)))) X9) X10) (mydivide (mysqrt X1) X10)) (exp (sin X1))) (mydivide X11 (mydivide X9 (sin X4)))) X11) (mydivide (- (- (- X6 (mydivide (- (- (- X7 X1) X1) X6) (mydivide (square X2) X10))) X9) (mydivide X11 (sin X4))) X7)) X1))) + 3.2310360388920216
@@ -80,6 +85,9 @@ $ MSE: 0.4459
 
 
 <h2> <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>White wine dataset</h2>
+
+<pre><code>$ cd path_to_whiteWine_folder
+</code></pre>
 
 <pre><code>$ java -jar flexgp.jar -test path_to_whiteWine_data -integer true -scaled knee.txt 
 $ KNEE MODEL: (1.7144450089364918 .* (mydivide (* (cos X11) X2) (mysqrt (sin (* X9 X10))))) + 6.0085077197027010 

@@ -41,11 +41,12 @@
 Machine Learning repository website</a>. This problem consists in modeling the quality (a grade from 1 to 10) of a 
 given red or white wine given 11 features such as acidity, alcohol degree etc. Note that the first line of both 
 datasets contains the labels of the different features and needs to be deleted. Additionally, the separators employed
-in the original dataset are semicolons and need to be commas:
+in the original dataset are semicolons and need to be commas. We show the steps necessary to preprocess the Red Wine
+dataset (the same steps apply to the White Wine dataset):
 
 <pre><code>$ cd path_to_file
 $ sed 1d original_data > new_data
-$ sed -i 's/;/,/g' original_data
+$ sed -i 's/;/,/g' new_data
 </code></pre>
 
 Once the data is properly formatted, we run:</p>

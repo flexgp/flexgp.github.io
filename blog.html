@@ -118,6 +118,7 @@ format compatible with FlexGP. As in the previous example, we first delete the f
 explanatory variables. We then reduce the dataset by taking the first 200K exemplars and removing all the lines 
 containing NaN values:
 <pre><code>
+$ cd path_to_file
 $ sed 1d original_data > kaggle.data
 $ head -n 200000 kaggle.data > reducedKaggle.data 
 $ less reducedKaggle.data | grep -v NaN > cleanKaggle.data

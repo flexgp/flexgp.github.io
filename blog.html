@@ -208,9 +208,11 @@ The dataset is composed of more than 500K songs, each described with a set of 90
 The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account
 to perform the data split. We first retrieve models from the training set. In the following example, we create an auxiliary 
 folder where the C++ temporary files will be generated and specify a 8-threaded C++ optimized evaluation. 
+
 <pre><code>$ mkdir tempFiles
 $ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 -cpp 8
 </code></pre>
+
 In this example, 306 generations were executed with a population size of 1000. 
 Therefore, 306(generations)*1000(population size)*370K(exemplars) = 1.13x10^11 model evaluations 
 were performed in the process. 

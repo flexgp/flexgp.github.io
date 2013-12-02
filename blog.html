@@ -138,8 +138,11 @@ dataset. The result is a 195458 exemplars dataset, each counting 58 explanatory 
 $ paste -d, cleanColsKaggle.data  targets.data > finalKaggle.data
 </code></pre>
 
-Finally, we employ FlexGP to model the data. In this case, the -cpp flag is employed, thus enabling the optimized C++ evaluation of candidate solutions. In the example below, 4 threads are used to speedup the process:
-<pre><code>$ java -jar flexgp.jar -train path_to_kaggle_data -minutes 60 -cpp 4
+Finally, we employ FlexGP to model the data. In this case, the -cpp flag is employed, thus enabling the optimized 
+C++ evaluation of candidate solutions. In the example below, 4 threads are used to speedup the process. Note that it 
+is necessary to create an auxiliary folder in which temporary C++ files will be generated:
+<pre><code>$ mkdir tempFiles
+$ java -jar flexgp.jar -train path_to_kaggle_data -minutes 60 -cpp 4
 </code></pre>
 
 <p>At the end of the run we measure the accuracy of the knee, least complex and most accurate models and the fused Pareto Front Model:</p>
@@ -203,9 +206,10 @@ The Million Song dataset is available at the <a href="http://archive.ics.uci.edu
 The dataset is composed of more than 500K songs, each described with a set of 90 features.
 
 The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account
-to perform the data split. We first retrieve models from the training set. 
-In the following example an 8-threaded C++ optimized evaluation is employed:
-<pre><code>$ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 -cpp 8
+to perform the data split. We first retrieve models from the training set. In the following example, we create an auxiliary 
+folder where the C++ temporary files will be generated and specify a 8-threaded C++ optimized evaluation. 
+<pre><code> $ mkdir tempFiles
+$ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 -cpp 8
 </code></pre>
 In this example, 306 generations were executed with a population size of 1000. 
 Therefore, 306(generations)*1000(population size)*370K(exemplars) = 1.13x10^11 model evaluations 

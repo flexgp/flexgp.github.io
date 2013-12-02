@@ -40,9 +40,19 @@
 <p>The Wine Quality dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality">UCI 
 Machine Learning repository website</a>. This problem consists in modeling the quality (a grade from 1 to 10) of a 
 given red or white wine given 11 features such as acidity, alcohol degree etc. Note that the first line of both 
-datasets contains the labels of the different features and needs to be deleted. Once the header has been removed, we run:</p>
+datasets contains the labels of the different features and needs to be deleted. Additionally, the separators employed
+in the original dataset are semicolons and need to be commas:
 
-<pre><code>$ java -jar flexgp.jar -train path_to_redWine_data -minutes 60 
+<pre><code>
+$ cd path_to_file
+$ sed 1d original_data > new_data
+$ sed -i 's/;/,/g' original_data
+</code></pre>
+
+Once the data is properly formatted, we run:</p>
+
+<pre><code>
+$ java -jar flexgp.jar -train path_to_redWine_data -minutes 60 
 $ java -jar flexgp.jar -train path_to_whiteWine_data -minutes 60 
 </code></pre>
 
@@ -108,6 +118,7 @@ format compatible with FlexGP. As in the previous example, we first delete the f
 explanatory variables. We then reduce the dataset by taking the first 200K exemplars and removing all the lines 
 containing NaN values:
 <pre><code>
+$ sed 1d original_data > kaggle.data
 $ head -n 200000 kaggle.data > reducedKaggle.data 
 $ less reducedKaggle.data | grep -v NaN > cleanKaggle.data
 </code></pre>

@@ -36,7 +36,7 @@
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Wine quality dataset</h1>
 
-<p>This problem consists in modeling the quality (a grade from 1 to 10) of a given red or white wine given 
+<p>The Wine Quality dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality">UCI Machine Learning repository website</a>. This problem consists in modeling the quality (a grade from 1 to 10) of a given red or white wine given 
 11 features such as acidity, alcohol degree etc.</p>
 
 <pre><code>$ java -jar flexgp.jar -train path_to_redWine_data -minutes 60 
@@ -99,7 +99,7 @@ $ MSE: 0.7013
 
 <h1> <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Kaggle bond price dataset</h1>
 
-Some preprocessing steps are required in this case to adapt the data to a format compatible with FlexGP. 
+This dataset can be downloaded from the <a href="http://www.kaggle.com/c/benchmark-bond-trade-price-challenge">Kaggle bond trade pricing challenge website</a>. Some preprocessing steps are required in this case to adapt the data to a format compatible with FlexGP. 
 We first reduce the kaggle dataset available at by taking the first 200K lines and remove all the lines containing NaN values:
 <pre><code>
 $ head -n 200000 kaggle.data > reducedKaggle.data 
@@ -190,7 +190,7 @@ $ MSE: 0.0395
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Million Song Dataset year prediction challenge</h1>
 
-The Million Song Dataset year prediction challenge is a regression problem in which the release year of the songs has to be predicted.
+The Million Song dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/YearPredictionMSD">UCI Machine Learning repository website</a>. The Million Song Dataset year prediction challenge is a regression problem in which the release year of the songs has to be predicted.
 The dataset is composed of more than 500K songs, each described with a set of 90 features.
 
 The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account

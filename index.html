@@ -108,7 +108,7 @@ $ sudo apt-get install g++
 <pre><code>$ sudo echo 2147483648 &gt; /proc/sys/kernel/shmmax
 </code></pre>
 
-<p>To benefit from the optimized C++ execution, append the -cpp flag followed by the number of CPU threads that will be employed to speedup FlexGP (4 in the example below). Additionally, it is necessary to create an auxiliary folder in which temporary C++ files will be generated:</p>
+<p>To benefit from the optimized C++ execution, append the -cpp flag followed by the number of CPU threads that will be employed to speedup FlexGP (4 in the example below). Additionally, it is necessary to create an auxiliary default folder in which temporary C++ files will be generated:</p>
 
 <pre><code>$ mkdir tempFiles
 $ java -jar flexgp.jar -train path_to_your_data -minutes 10 -cpp 4

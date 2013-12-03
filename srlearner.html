@@ -38,12 +38,12 @@ href="#flexgp-machine-learning-with-genetic-programming"><span class="octicon
 octicon-link"></span></a>SR learner: Symbolic Regression Core Learner</h1>
 
 <p>Current release provides functionality both for performing Symbolic Regression on numerical datasets and 
-for testing the retrieved models. In this website we provide a quick tutorial on how to get started with SRLearner.</p>
+for testing the retrieved models. In this page we provide a quick tutorial on how to get started with SRLearner.</p>
 
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Tutorial</h1>
 
-<p>This release is only supported for Linux Debian platforms.</p>
+<p>Note: this release is only supported for Linux Debian platforms.</p>
 
 <h2>
 <a name="step-2-data-format" class="anchor" href="#step-2-data-format"><span class="octicon 
@@ -93,7 +93,7 @@ Vol. 96, No. 454 (Jun., 2001), pp. 574-588</em>).</p></li>
 <a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test 
 the models</h4>
 
-<p>FlexGP provides functionality to obtain the Mean Squared Error (MSE) of the retrieved models once the training 
+<p>The SR learner provides functionality to obtain the Mean Squared Error (MSE) of the retrieved models once the training 
 is finished. In the examples below, the additional <em>-integer</em> flag indicates whether the targets are integer 
 or floating point values. To test the models saved in files 1) to 5), do:</p>
 
@@ -134,7 +134,7 @@ $ sudo apt-get install g++
 <p>To benefit from the optimized C++ execution, append the -cpp flag followed by the number of CPU threads that will be employed to speedup FlexGP (4 in the example below). Additionally, it is necessary to create an auxiliary default folder in which temporary C++ files will be generated:</p>
 
 <pre><code>$ mkdir tempFiles
-$ java -jar flexgp.jar -train path_to_your_data -minutes 10 -cpp 4
+$ java -jar sr.jar -train path_to_your_data -minutes 10 -cpp 4
 </code></pre>
 
 

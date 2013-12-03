@@ -35,7 +35,7 @@
         <h1>
 <a name="flexgp-machine-learning-with-genetic-programming" class="anchor" 
 href="#flexgp-machine-learning-with-genetic-programming"><span class="octicon 
-octicon-link"></span></a>SRLearner: Symbolic Regression Core Learner</h1>
+octicon-link"></span></a>SR learner: Symbolic Regression Core Learner</h1>
 
 <p>Current release provides functionality both for performing Symbolic Regression on numerical datasets and 
 for testing the retrieved models. In this website we provide a quick tutorial on how to get started with SRLearner.</p>
@@ -60,14 +60,14 @@ octicon-link"></span></a>Step 2: Download the sr.jar file from <a href="https://
 
 <h2>
 <a name="step-3-running-flexgp" class="anchor" href="#step-3-running-flexgp"><span class="octicon 
-octicon-link"></span></a>Step 3: Running SRLearner</h2>
+octicon-link"></span></a>Step 3: Running SR learner</h2>
 
-<p>In the current release, it is only possible to run SRLearner directly from your terminal (a Matlab wrapper 
+<p>In the current release, it is only possible to run SR learner directly from your terminal (a Matlab wrapper 
 will be included soon).</p>
 
 <h3>
 <a name="running-flexgp-from-the-terminal" class="anchor" href="#running-flexgp-from-the-terminal"><span 
-class="octicon octicon-link"></span></a>Running SRLearner from the terminal</h3>
+class="octicon octicon-link"></span></a>Running SR learner from the terminal</h3>
 
 <h4>
 <a name="model-the-data" class="anchor" href="#model-the-data"><span class="octicon octicon-link"></span></a>Model 

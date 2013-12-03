@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Flexgp.github.io by flexgp</title>
+    <title>Examples</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -120,7 +120,7 @@ $ MSE: 0.7013
 
 This dataset can be downloaded from the <a href="http://www.kaggle.com/c/benchmark-bond-trade-price-challenge">Kaggle 
 bond trade price challenge website</a>. Some preprocessing steps are required in this case to adapt the data to a 
-format compatible with FlexGP. As in the previous example, we first delete the first line containing the labels of the 
+format compatible with the SR learner. As in the previous example, we first delete the first line containing the labels of the 
 explanatory variables. We then reduce the dataset by taking the first 200K exemplars and removing all the lines 
 containing NaN values:
 <pre><code>$ cd path_to_file
@@ -141,7 +141,7 @@ dataset. The result is a 195458 exemplars dataset, each counting 58 explanatory 
 $ paste -d, cleanColsKaggle.data  targets.data > finalKaggle.data
 </code></pre>
 
-Finally, we employ FlexGP to model the data. In this case, the -cpp flag is employed, thus enabling the optimized 
+Finally, we employ the SR learner to model the data. In this case, the -cpp flag is employed, thus enabling the optimized 
 C++ evaluation of candidate solutions. In the example below, 4 threads are used to speedup the process. Note that it 
 is necessary to create an auxiliary folder in which temporary C++ files will be generated:
 <pre><code>$ mkdir tempFiles
@@ -176,7 +176,7 @@ $ MSE: 0.9488
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>NOx Emissions dataset</h1>
 
 The data is split into training and test set. We first retrieve models from the training set: 
-<pre><code>$ java -jar flexgp.jar -train path_to_NOx_train_data -minutes 60 
+<pre><code>$ java -jar sr.jar -train path_to_NOx_train_data -minutes 60 
 </code></pre>
 
 Then, the obtained models are tested on the test set:
@@ -213,7 +213,7 @@ to perform the data split. We first retrieve models from the training set. In th
 folder where the C++ temporary files will be generated and specify a 8-threaded C++ optimized evaluation. 
 
 <pre><code>$ mkdir tempFiles
-$ java -jar flexgp.jar -train path_to_msd_train_data -minutes 60 -cpp 8
+$ java -jar sr.jar -train path_to_msd_train_data -minutes 60 -cpp 8
 </code></pre>
 
 In this example, 306 generations were executed with a population size of 1000. 
@@ -222,22 +222,22 @@ were performed in the process.
 
 The obtained models are then tested on unseen data:
 
-<pre><code>$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled knee.txt 
+<pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled knee.txt 
 $ KNEE MODEL: (0.0041587599553168 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ X15 X3) (+ X6 X18)) (+ X6 X6))) (+ (+ X6 (+ X6 X3)) (+ (+ (+ X6 (+ X15 X6)) (+ X18 (+ X6 (+ X71 X6)))) (+ (+ X6 X6) (+ X6 X18)))))) + 1994.8900146484375000
 $ MSE: 113.9947
 </code></pre>
 
-<pre><code>$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled leastComplex.txt 
+<pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled leastComplex.txt 
 $ LEAST COMPLEX MODEL: (-0.0002395899937255 .* X78) + 1995.7399902343750000
 $ MSE: 119.4283
 </code></pre>
 
-<pre><code>$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -scaled mostAccurate.txt 
+<pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled mostAccurate.txt 
 $ MOST ACCURATE MODEL: (0.0027921800501645 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ (+ X15 X6) X3) (+ X6 X18)) (+ (+ (+ (+ X6 X6) (+ X6 (+ X6 X89))) (+ X6 X6)) (+ (+ (+ X6 X6) X80) X6)))) (+ (+ X6 X3) (+ (+ (+ (+ (+ (+ X15 X6) (+ (+ X6 (+ X6 X6)) X18)) (+ (+ X6 X6) (+ X6 X18))) X16) (+ X18 (+ (+ (+ (+ X6 X6) X18) (+ X3 (+ X6 X6))) (+ X71 (+ X3 X16))))) (+ X18 (+ (+ (+ (+ X6 X6) (+ (+ X6 X6) (+ (+ X6 (+ X6 X6)) (+ (+ (+ (+ (+ X3 (+ (+ X6 X6) X6)) (+ (+ X6 X2) X18)) (+ X6 X6)) X6) (+ X6 (+ X80 X18)))))) (+ (+ X3 (+ X6 X6)) (+ (+ X6 X2) X18))) (+ (+ X6 (+ X3 (+ (+ X6 X6) (+ X6 (+ X6 X3))))) X6))))))) + 1994.4200439453125000
 $ MSE: 112.2870
 </code></pre>
 
-<pre><code>$ java -jar flexgp.jar -test path_to_msd_test_data -integer true -fused fusedModel.txt
+<pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -fused fusedModel.txt
 $ MSE: 112.3031
 </code></pre>
 

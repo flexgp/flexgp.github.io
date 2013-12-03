@@ -106,15 +106,19 @@ or floating point values. To test the models saved in files 1) to 5), do:</p>
 </code></pre>
 
 <h3>
-<a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link"></span></a>Running FlexGP from Matlab</h3>
+<a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link"></span></a>Running SR learner from Matlab</h3>
 
 <p>To be done</p>
 
 
+<h1>
+<a name="bellsandwhistles" class="anchor" href="#tutorial"><span class="octicon 
+octicon-link"></span></a>Bells and whistles</h1>
+
 <h2>
 <a name="step-3-speeding-up-your-runs-with-c-optimized-execution" class="anchor" 
 href="#step-3-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon 
-octicon-link"></span></a>Step 3: Speeding up your runs with C++ optimized execution</h2>
+octicon-link"></span></a>1) Speeding up your runs with C++ optimized execution</h2>
 
 <p>This option requires the installation of the gcc and g++ compilers and the configuration of the Linux kernel parameter governing the maximum size of shared memory segments:</p>
 
@@ -132,6 +136,14 @@ $ sudo apt-get install g++
 <pre><code>$ mkdir tempFiles
 $ java -jar flexgp.jar -train path_to_your_data -minutes 10 -cpp 4
 </code></pre>
+
+
+<h2>
+<a name="step-3-speeding-up-your-runs-with-c-optimized-execution" class="anchor" 
+href="#step-3-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon 
+octicon-link"></span></a>2) Change the default parameters</h2>
+
+
 
 <h1>
 <a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h1>

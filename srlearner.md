@@ -47,23 +47,27 @@ for testing the retrieved models. In this website we provide a quick tutorial on
 
 <h2>
 <a name="step-2-data-format" class="anchor" href="#step-2-data-format"><span class="octicon 
-octicon-link"></span></a>Step 2: Data format</h2>
+octicon-link"></span></a>Step 1: Data format</h2>
 
 <p>Data must be provided in csv format where each line corresponds to an exemplar and the target values are placed 
 in the last column. Note that any additional line or column containing labels or nominal values needs to be removed.</p>
 
 <h2>
-<a name="step-1-download-the-flexgpjar-file-from-here" class="anchor" href="#step-1-download-the-flexgpjar-file-from-here"><span class="octicon octicon-link"></span></a>Step 1: Download the flexgp.jar file from <a href="https://github.com/flexgp/flexgp.github.io/releases">here</a>
+<a name="step-1-download-the-flexgpjar-file-from-here" class="anchor" 
+href="#step-1-download-the-flexgpjar-file-from-here"><span class="octicon 
+octicon-link"></span></a>Step 2: Download the sr.jar file from <a href="https://github.com/flexgp/flexgp.github.io/releases">here</a>
 </h2>
 
 <h2>
-<a name="step-3-running-flexgp" class="anchor" href="#step-3-running-flexgp"><span class="octicon octicon-link"></span></a>Step 3: Running FlexGP</h2>
+<a name="step-3-running-flexgp" class="anchor" href="#step-3-running-flexgp"><span class="octicon 
+octicon-link"></span></a>Step 3: Running SRLearner</h2>
 
-<p>In the current release, it is only possible to run FlexGP directly from your terminal (a Matlab wrapper 
+<p>In the current release, it is only possible to run SRLearner directly from your terminal (a Matlab wrapper 
 will be included soon).</p>
 
 <h3>
-<a name="running-flexgp-from-the-terminal" class="anchor" href="#running-flexgp-from-the-terminal"><span class="octicon octicon-link"></span></a>Running FlexGP from the terminal</h3>
+<a name="running-flexgp-from-the-terminal" class="anchor" href="#running-flexgp-from-the-terminal"><span 
+class="octicon octicon-link"></span></a>Running SRLearner from the terminal</h3>
 
 <h4>
 <a name="model-the-data" class="anchor" href="#model-the-data"><span class="octicon octicon-link"></span></a>Model 
@@ -71,7 +75,7 @@ the data</h4>
 
 <p>All you need to provide is the path to your dataset and the optimization time</p>
 
-<pre><code>$ java -jar flexgp.jar -train path_to_your_data -minutes 10 
+<pre><code>$ java -jar sr.jar -train path_to_your_data -minutes 10 
 </code></pre>
 
 <p>At the end of the run a set of files are generated:</p>
@@ -82,18 +86,23 @@ the data</h4>
 <li><p><strong>mostAccurate.txt</strong>: most accurate model of the Pareto Front.</p></li>
 <li><p><strong>knee.txt</strong>: model at the knee of the Pareto Front.</p></li>
 <li><p><strong>bestModelGeneration.txt</strong>: most accurate model per generation.</p></li>
-<li><p><strong>fusedModel.txt</strong>: fused model of the Pareto Front obtained with Adaptive Regression by Mixing (see <em>Adaptive Regression by Mixing. Yuhong Yang. Journal of the American Statistical Association Vol. 96, No. 454 (Jun., 2001), pp. 574-588</em>).</p></li>
+<li><p><strong>fusedModel.txt</strong>: fused model of the Pareto Front obtained with Adaptive Regression 
+by Mixing (see <em>Adaptive Regression by Mixing. Yuhong Yang. Journal of the American Statistical Association 
+Vol. 96, No. 454 (Jun., 2001), pp. 574-588</em>).</p></li>
 </ol><h4>
-<a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test the models</h4>
+<a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test 
+the models</h4>
 
-<p>FlexGP provides functionality to obtain the Mean Squared Error (MSE) of the retrieved models once the training is finished. In the examples below, the additional <em>-integer</em> flag indicates whether the targets are integer or floating point values. To test the models saved in files 1) to 5), do:</p>
+<p>FlexGP provides functionality to obtain the Mean Squared Error (MSE) of the retrieved models once the training 
+is finished. In the examples below, the additional <em>-integer</em> flag indicates whether the targets are integer 
+or floating point values. To test the models saved in files 1) to 5), do:</p>
 
-<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer true -scaled model_file 
+<pre><code>$ java -jar sr.jar -test path_to_your_data -integer true -scaled model_file 
 </code></pre>
 
 <p>To obtain the MSE of the fused model of the Pareto Front:</p>
 
-<pre><code>$ java -jar flexgp.jar -test path_to_your_data -integer false -fused model_file 
+<pre><code>$ java -jar sr.jar -test path_to_your_data -integer false -fused model_file 
 </code></pre>
 
 <h3>
@@ -101,8 +110,11 @@ the data</h4>
 
 <p>To be done</p>
 
+
 <h2>
-<a name="step-3-speeding-up-your-runs-with-c-optimized-execution" class="anchor" href="#step-3-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon octicon-link"></span></a>Step 3: Speeding up your runs with C++ optimized execution</h2>
+<a name="step-3-speeding-up-your-runs-with-c-optimized-execution" class="anchor" 
+href="#step-3-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon 
+octicon-link"></span></a>Step 3: Speeding up your runs with C++ optimized execution</h2>
 
 <p>This option requires the installation of the gcc and g++ compilers and the configuration of the Linux kernel parameter governing the maximum size of shared memory segments:</p>
 

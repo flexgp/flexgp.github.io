@@ -99,22 +99,26 @@ MAE fused Model: 0.40212632895559725
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_whiteWine_data -integer true -scaled knee.txt 
-$ KNEE MODEL: (1.7144450089364918 .* (mydivide (* (cos X11) X2) (mysqrt (sin (* X9 X10))))) + 6.0085077197027010 
-$ MSE: 0.7134
+(1.7144450089364918 .* (mydivide (* (cos X11) X2) (mysqrt (sin (* X9 X10))))) + 6.0085077197027010
+MSE: 0.7133523887300939
+MAE: 0.5618619844834626
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_whiteWine_data -integer true -scaled leastComplex.txt 
-$ LEAST COMPLEX MODEL: (0.5831540037037669 .* X9) + 4.0186588950880970
-$ MSE: 0.7991
+(0.5831540037037669 .* X9) + 4.0186588950880970
+MSE: 0.7991016741527154
+MAE: 0.6304614128215599
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_whiteWine_data -integer true -scaled mostAccurate.txt 
-$ MOST ACCURATE MODEL: (1.4859603473683902 .* (mydivide (* (cos X11) (sin X2)) (sin (mysqrt (sin (sin (mydivide (* (cos (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (mysqrt (sin (sin (sin (sin (sin (mysqrt (mysqrt (mysqrt (mysqrt (sin (log (sin (sin (sin (sin (sin (sin (sin (mysqrt X3))))))))))))))))))))))))))))))))))) (sin (sin (sin (sin (exp (log (sin (sin (sin (sin (sin (sin (sin (sin (mysqrt X3)))))))))))))))) (mysqrt X5)))))))) + 6.0163580514028405
-$ MSE: 0.7013
+(1.4859603473683902 .* (mydivide (* (cos X11) (sin X2)) (sin (mysqrt (sin (sin (mydivide (* (cos (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (sin (mysqrt (sin (sin (sin (sin (sin (mysqrt (mysqrt (mysqrt (mysqrt (sin (log (sin (sin (sin (sin (sin (sin (sin (mysqrt X3))))))))))))))))))))))))))))))))))) (sin (sin (sin (sin (exp (log (sin (sin (sin (sin (sin (sin (sin (sin (mysqrt X3)))))))))))))))) (mysqrt X5)))))))) + 6.0163580514028405
+MSE: 0.7013066557778685
+MAE: 0.5596161698652511
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_whiteWine_data -integer true -fused fusedModel.txt
-$ MSE: 0.7013
+MSE fused Model: 0.7013066557778685
+MAE fused Model: 0.5596161698652511
 </code></pre>
 
 
@@ -155,22 +159,26 @@ $ java -jar sr.jar -train path_to_kaggle_data -minutes 60 -cpp 4
 <p>At the end of the run we measure the accuracy of the knee, least complex and most accurate models and the fused Pareto Front Model:</p>
 
 <pre><code>$ java -jar sr.jar -test path_to_kaggle_data -integer false -scaled knee.txt 
-$ KNEE MODEL: (0.0986682027578354 .* (+ (+ (+ (+ X20 X10) X50) (+ (mysqrt X30) (mysqrt X30))) (+ (+ X8 (+ X15 X10)) (+ (+ (+ X8 X10) X7) (+ X35 X10))))) + -0.9139559864997864
-$ MSE: 0.9568
+(0.0986682027578354 .* (+ (+ (+ (+ X20 X10) X50) (+ (mysqrt X30) (mysqrt X30))) (+ (+ X8 (+ X15 X10)) (+ (+ (+ X8 X10) X7) (+ X35 X10))))) + -0.9139559864997864
+MSE: 0.9568307415218184
+MAE: 0.5808919648383791
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_kaggle_data -integer false -scaled leastComplex.txt 
-$ LEAST COMPLEX MODEL: (0.9925869703292847 .* X10) + 0.7772449851036072
-$ MSE: 1.3072
+(0.9925869703292847 .* X10) + 0.7772449851036072
+MSE: 1.307177978046785
+MAE: 0.6098333240942719
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_kaggle_data -integer false -scaled mostAccurate.txt 
-$ MOST ACCURATE MODEL: (0.0249582007527351 .* (+ (+ (+ X25 (+ (+ (+ X8 (+ X55 (+ X8 (+ (+ X12 X30) (+ (+ X10 (+ (mysqrt X10) X10)) (+ (mysqrt (+ X35 (square X12))) (+ (mysqrt X35) X10))))))) (+ (mysqrt (+ X45 X50)) (+ X7 (+ (mysqrt X8) (sin (mysqrt X20)))))) X10)) X50) (+ (+ (+ X35 (+ (+ X15 (+ X7 (mysqrt (+ X15 X3)))) (+ (+ (+ (mysqrt (+ X10 X10)) (+ (+ (+ X8 (+ X55 (+ X8 (+ (+ X12 X30) X10)))) (+ (mysqrt (+ X3 X10)) X10)) X10)) X50) (+ (+ (+ (sin X7) (+ X15 (+ X7 (mysqrt X20)))) X40) (+ (+ X4 (+ (+ X20 (+ (mysqrt X10) (mysqrt X10))) (+ (mysqrt X10) X10))) (+ (+ (+ (+ X8 (+ X10 (mysqrt (+ X15 (+ (mysqrt X10) X50))))) X15) (+ (mysqrt X10) (+ X7 X10))) (+ (mysqrt X7) (+ X7 X10)))))))) X40) (+ (+ X20 (+ (+ X20 (mysqrt (+ (+ (+ X55 (+ X15 X3)) X15) X8))) X8)) (+ (+ (+ (+ X8 (+ X10 (mysqrt (+ X15 X3)))) (+ X10 X10)) (+ (mysqrt (+ X8 (+ X15 X10))) (+ X7 X10))) X10))))) + -2.9934198856353760
-$ MSE: 0.9459
+(0.0249582007527351 .* (+ (+ (+ X25 (+ (+ (+ X8 (+ X55 (+ X8 (+ (+ X12 X30) (+ (+ X10 (+ (mysqrt X10) X10)) (+ (mysqrt (+ X35 (square X12))) (+ (mysqrt X35) X10))))))) (+ (mysqrt (+ X45 X50)) (+ X7 (+ (mysqrt X8) (sin (mysqrt X20)))))) X10)) X50) (+ (+ (+ X35 (+ (+ X15 (+ X7 (mysqrt (+ X15 X3)))) (+ (+ (+ (mysqrt (+ X10 X10)) (+ (+ (+ X8 (+ X55 (+ X8 (+ (+ X12 X30) X10)))) (+ (mysqrt (+ X3 X10)) X10)) X10)) X50) (+ (+ (+ (sin X7) (+ X15 (+ X7 (mysqrt X20)))) X40) (+ (+ X4 (+ (+ X20 (+ (mysqrt X10) (mysqrt X10))) (+ (mysqrt X10) X10))) (+ (+ (+ (+ X8 (+ X10 (mysqrt (+ X15 (+ (mysqrt X10) X50))))) X15) (+ (mysqrt X10) (+ X7 X10))) (+ (mysqrt X7) (+ X7 X10)))))))) X40) (+ (+ X20 (+ (+ X20 (mysqrt (+ (+ (+ X55 (+ X15 X3)) X15) X8))) X8)) (+ (+ (+ (+ X8 (+ X10 (mysqrt (+ X15 X3)))) (+ X10 X10)) (+ (mysqrt (+ X8 (+ X15 X10))) (+ X7 X10))) X10))))) + -2.9934198856353760
+MSE: 0.9459161705227037
+MAE: 0.5811238430405654
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_kaggle_data -integer false -fused fusedModel.txt
-$ MSE: 0.9488
+MSE fused Model: 0.9488283608868329
+MAE fused Model: 0.5816370761201752
 </code></pre>
 
 
@@ -185,22 +193,26 @@ The data is split into training and test set. We first retrieve models from the 
 
 Then, the obtained models are tested on the test set:
 <pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -scaled knee.txt 
-$ KNEE MODEL: (0.3503123449969823 .* (* (- X6 (* X11 (* X11 (- (- (* X18 X11) (- X13 X9)) X14)))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (* X14 X13)) (mysqrt (mysqrt X3))) (square (- (cube X15) X3)))))) + 0.0666665555347619
-$ MSE: 0.0387
+(0.3503123449969823 .* (* (- X6 (* X11 (* X11 (- (- (* X18 X11) (- X13 X9)) X14)))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (* X14 X13)) (mysqrt (mysqrt X3))) (square (- (cube X15) X3)))))) + 0.0666665555347619
+MSE: 0.03866067788176831
+MAE: 0.15697528915065745
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -scaled leastComplex.txt 
-$ LEAST COMPLEX MODEL: (0.3588259382986629 .* X13) + 0.0677718532771849
-$ MSE: 0.0567
+(0.3588259382986629 .* X13) + 0.0677718532771849
+MSE: 0.05669892879042211
+MAE: 0.18320088883003482
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -scaled mostAccurate.txt 
-$ MOST ACCURATE MODEL: (0.3293701574352099 .* (* (- X6 (* X11 (* X11 (* X11 (sin (sin (- (- X18 (- X13 X9)) X14))))))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (- (mysqrt (mysqrt (- (* (- X13 (* X12 (mysqrt (- (cube (* (exp (quart (square X6))) (sin (- X4 (+ (- (- (- X14 (- (- (* (- X18 (- X13 (mysqrt (mysqrt (- (cube X6) X12))))) (- (* X13 (cube X6)) (+ (- X12 X11) (+ (- X12 X13) (square X9))))) (* (mysqrt (- (cube X15) (- (square X9) (* X14 X13)))) X18)) (* X14 X13))) (cube (- X6 (sin (- X18 X13))))) X6) X12))))) X12)))) (- (* X14 (sin (- (mysqrt X6) (+ (- (- (quart X14) (cube (- X6 (sin (- X18 (square X9)))))) X9) (square X13))))) (+ (- X12 (mysqrt X13)) (square X9)))) (* X11 (* X11 (* X6 (sin (sin (sin X18))))))))) (- (square X9) (* X14 X13)))) (mysqrt (- X6 X3))) (square (- (cube X15) X3)))))) + 0.0512241480213157
-$ MSE: 0.0362
+(0.3293701574352099 .* (* (- X6 (* X11 (* X11 (* X11 (sin (sin (- (- X18 (- X13 X9)) X14))))))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (- (mysqrt (mysqrt (- (* (- X13 (* X12 (mysqrt (- (cube (* (exp (quart (square X6))) (sin (- X4 (+ (- (- (- X14 (- (- (* (- X18 (- X13 (mysqrt (mysqrt (- (cube X6) X12))))) (- (* X13 (cube X6)) (+ (- X12 X11) (+ (- X12 X13) (square X9))))) (* (mysqrt (- (cube X15) (- (square X9) (* X14 X13)))) X18)) (* X14 X13))) (cube (- X6 (sin (- X18 X13))))) X6) X12))))) X12)))) (- (* X14 (sin (- (mysqrt X6) (+ (- (- (quart X14) (cube (- X6 (sin (- X18 (square X9)))))) X9) (square X13))))) (+ (- X12 (mysqrt X13)) (square X9)))) (* X11 (* X11 (* X6 (sin (sin (sin X18))))))))) (- (square X9) (* X14 X13)))) (mysqrt (- X6 X3))) (square (- (cube X15) X3)))))) + 0.0512241480213157
+MSE: 0.036183527341113
+MAE: 0.14965293512345454
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -fused fusedModel.txt
-$ MSE: 0.0395
+MSE fused Model: 0.03950888612009337
+MAE fused Model: 0.15696745165002576
 </code></pre>
 
 
@@ -227,22 +239,26 @@ were performed in the process.
 The obtained models are then tested on unseen data:
 
 <pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled knee.txt 
-$ KNEE MODEL: (0.0041587599553168 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ X15 X3) (+ X6 X18)) (+ X6 X6))) (+ (+ X6 (+ X6 X3)) (+ (+ (+ X6 (+ X15 X6)) (+ X18 (+ X6 (+ X71 X6)))) (+ (+ X6 X6) (+ X6 X18)))))) + 1994.8900146484375000
-$ MSE: 113.9947
+(0.0041587599553168 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ X15 X3) (+ X6 X18)) (+ X6 X6))) (+ (+ X6 (+ X6 X3)) (+ (+ (+ X6 (+ X15 X6)) (+ X18 (+ X6 (+ X71 X6)))) (+ (+ X6 X6) (+ X6 X18)))))) + 1994.8900146484375000
+MSE: 113.99467981257321
+MAE: 8.627577118313159
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled leastComplex.txt 
-$ LEAST COMPLEX MODEL: (-0.0002395899937255 .* X78) + 1995.7399902343750000
-$ MSE: 119.4283
+(-0.0002395899937255 .* X78) + 1995.7399902343750000
+MSE: 119.42827020695042
+MAE: 8.797266692698164
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled mostAccurate.txt 
-$ MOST ACCURATE MODEL: (0.0027921800501645 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ (+ X15 X6) X3) (+ X6 X18)) (+ (+ (+ (+ X6 X6) (+ X6 (+ X6 X89))) (+ X6 X6)) (+ (+ (+ X6 X6) X80) X6)))) (+ (+ X6 X3) (+ (+ (+ (+ (+ (+ X15 X6) (+ (+ X6 (+ X6 X6)) X18)) (+ (+ X6 X6) (+ X6 X18))) X16) (+ X18 (+ (+ (+ (+ X6 X6) X18) (+ X3 (+ X6 X6))) (+ X71 (+ X3 X16))))) (+ X18 (+ (+ (+ (+ X6 X6) (+ (+ X6 X6) (+ (+ X6 (+ X6 X6)) (+ (+ (+ (+ (+ X3 (+ (+ X6 X6) X6)) (+ (+ X6 X2) X18)) (+ X6 X6)) X6) (+ X6 (+ X80 X18)))))) (+ (+ X3 (+ X6 X6)) (+ (+ X6 X2) X18))) (+ (+ X6 (+ X3 (+ (+ X6 X6) (+ X6 (+ X6 X3))))) X6))))))) + 1994.4200439453125000
-$ MSE: 112.2870
+(0.0027921800501645 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ (+ X15 X6) X3) (+ X6 X18)) (+ (+ (+ (+ X6 X6) (+ X6 (+ X6 X89))) (+ X6 X6)) (+ (+ (+ X6 X6) X80) X6)))) (+ (+ X6 X3) (+ (+ (+ (+ (+ (+ X15 X6) (+ (+ X6 (+ X6 X6)) X18)) (+ (+ X6 X6) (+ X6 X18))) X16) (+ X18 (+ (+ (+ (+ X6 X6) X18) (+ X3 (+ X6 X6))) (+ X71 (+ X3 X16))))) (+ X18 (+ (+ (+ (+ X6 X6) (+ (+ X6 X6) (+ (+ X6 (+ X6 X6)) (+ (+ (+ (+ (+ X3 (+ (+ X6 X6) X6)) (+ (+ X6 X2) X18)) (+ X6 X6)) X6) (+ X6 (+ X80 X18)))))) (+ (+ X3 (+ X6 X6)) (+ (+ X6 X2) X18))) (+ (+ X6 (+ X3 (+ (+ X6 X6) (+ X6 (+ X6 X3))))) X6))))))) + 1994.4200439453125000
+MSE: 112.28694845763374
+MAE: 8.544445529090199
 </code></pre>
 
 <pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -fused fusedModel.txt
-$ MSE: 112.3031
+MSE fused Model: 112.30305544709098
+MAE fused Model: 8.54126317844592
 </code></pre>
 
 

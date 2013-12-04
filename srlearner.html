@@ -93,9 +93,16 @@ Vol. 96, No. 454 (Jun., 2001), pp. 574-588</em>).</p></li>
 <a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test 
 the models</h4>
 
-<p>The SR learner provides functionality to obtain the Mean Squared Error (MSE) of the retrieved models once the training 
-is finished. In the examples below, the additional <em>-integer</em> flag indicates whether the targets are integer 
-or floating point values. To test the models saved in files 1) to 5), do:</p>
+<p>The SR learner provides functionality to obtain the Mean Squared Error (MSE) and Mean Average Error (MAE) of 
+ the retrieved models once the training is finished. To automatically test all the generated models, type:</p>
+
+<pre><code>$ cd run_folder
+$ java -jar sr.jar -test path_to_your_data
+</code></pre>
+
+It is also possible to evaluate the different models separately and to specify whether the predictions should be rounded
+ to the nearest integer value before computing the errors with the additional <em>-integer</em> flag. To test the
+ models saved in files 1) to 5), do:</p>
 
 <pre><code>$ java -jar sr.jar -test path_to_your_data -integer true -scaled model_file 
 </code></pre>

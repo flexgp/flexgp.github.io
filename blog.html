@@ -263,7 +263,58 @@ MAE fused Model: 8.54126317844592
 
 
 
+<h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Classification by Rule Trees: Skin dataset</h1>
 
+<p>Thee Skin Segmentation dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Skin+Segmentation">UCI 
+Machine Learning repository website</a>. The Skin Segmentation is a binary classification problem composed of roughly 
+ 250K exemplars, each described with a set of 3 features.</p>
+ 
+ We now report the steps neceassy to use the Rule Tree learner with this dataset. First, the original class labels
+ (1 or 2) must be replaced with 0 or 1 values:
+ 
+<pre><code>$ sed 's/1\r/0/g' skin.data > skin02.data
+$  sed 's/2\r/1/g' skin02.data > skin01.data
+</code></pre>
+
+Once the labels have been replaced, we shuffle the resulting dataset and perform a 2/3 1/3 split to obtain the
+ training and test set:
+<pre><code>$ sort --random-sort skin01.data > skinShuffle.data
+$ head -n 161737 skinShuffle.data > skinTrain.csv
+$ tail -n 83320 skinShuffle.data > skinTest.csv
+</code></pre>
+
+We create a properties file containing an additional parameter that indicates a population size of 2000:
+
+<pre><code>$ less skin.properties
+pop_size = 2000
+</code></pre>
+
+We now run the Rule Tree learner with the following commad: 
+
+<pre><code>$ java -jar ruletree.jar -train path_to_skinTrain -minutes 60 -properties skin.properties
+</code></pre>
+
+
+The Rule Tree learner will divide the observed range of variables into intervals. These intervals are reported in
+ the file conditions.txt and will be used by the learner to construct boolean expressions. In this case, 3 conditions
+ are contructed for the first and second explanatory variables while the range of values of X3 is split in two intervals.
+ 
+<pre><code>$ less conditions.txt
+C1 : X1 in [ 0.0 ; 23.04 ]
+C2 : X1 in [ 23.04 ; 181.7600000000001 ]
+C3 : X1 in [ 181.7600000000001 ; 256.00000000000017 ]
+C4 : X2 in [ 0.0 ; 79.36000000000003 ]
+C5 : X2 in [ 79.36000000000003 ; 222.72000000000014 ]
+C6 : X2 in [ 222.72000000000014 ; 256.00000000000017 ]
+C7 : X3 in [ 0.0 ; 148.48000000000008 ]
+C8 : X3 in [ 148.48000000000008 ; 256.00000000000017 ]
+</code></pre>
+
+The obtained models are then tested on unseen data:
+
+<pre><code>$ java -jar ruletree.jar -test path_to_skinTest -pathToConditions path_to_conditions 
+</code></pre>
 
 
 <h1>

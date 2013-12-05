@@ -261,6 +261,65 @@ MSE fused Model: 112.30305544709098
 MAE fused Model: 8.54126317844592
 </code></pre>
 
+<h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Classification
+ by Rule Trees: Banknote Authentication</h1>
+
+<p>Thee Banknote Authentication dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/banknote+authentication">UCI 
+Machine Learning repository website</a>. It is a binary classification problem composed of 1372 exemplars,
+ each described with a set of 4 features. The dataset is shuffled and split to obtain the
+ training set (66%) and test set (33%):
+<pre><code>$ sort --random-sort data_banknote_authentication.csv > banknoteShuffled.csv
+$ head -n905 banknoteShuffled.csv > banknoteTrain.csv
+$ tail -n466 banknoteShuffled.csv > banknoteTest.csv
+</code></pre>
+
+
+We now run the Rule Tree learner with the following command: 
+
+<pre><code>$ java -jar ruletree.jar -train path_to_banknoteTrain -minutes 1
+</code></pre>
+
+
+In a first step, the Rule Tree learner will divide the range of observed values of each variable into intervals. These
+ intervals are reported in the file conditions.txt and will be used by the learner to construct boolean expressions.
+ In this case, 2 conditions are contructed for the first, second, and third explanatory variables while the range of
+ values of X4 is split into two intervals.
+ 
+<pre><code>$ less conditions.txt
+C1 : X1 in [ -7.0421 ; 0.5527080000000055 ]
+C2 : X1 in [ 0.5527080000000055 ; 7.563300000000012 ]
+C3 : X2 in [ -13.6779 ; 2.8997999999999906 ]
+C4 : X2 in [ 2.8997999999999906 ; 13.951599999999978 ]
+C5 : X3 in [ -5.2613 ; 6.707950000000006 ]
+C6 : X3 in [ 6.707950000000006 ; 18.677200000000006 ]
+C7 : X4 in [ -8.5482 ; -7.228452999999995 ]
+C8 : X4 in [ -7.228452999999995 ; -3.869096999999983 ]
+C9 : X4 in [ -3.869096999999983 ; 0.9299830000000169 ]
+C10 : X4 in [ 0.9299830000000169 ; 3.449500000000017 ]
+</code></pre>
+
+The obtained models are then tested on unseen data:
+
+<pre><code>$ java -jar ruletree.jar -test path_to_banknoteTest -pathToConditions conditions.txt
+RULE TREE: C1
+ACCURACY: 0.8261802575107297
+PRECISION: 0.7212389380530974
+RECALL: 0.9005524861878453
+F-SCORE: 0.800982800982801
+FALSE POSITIVE RATE: 0.22105263157894736
+FALSE NEGATIVE RATE: 0.09944751381215469
+</code></pre>
+
+The Rule Tree learner only reports a model of minimal complexity that contains a condition
+ for variable X1. In fact, C1 represents the following rule:
+
+<pre><code>C1 : X1 in [ -7.0421 ; 0.5527 ]
+</code></pre>
+
+
+
+
 
 
 <h1>
@@ -317,6 +376,7 @@ The obtained models are then tested on unseen data:
 
 <pre><code>$ java -jar ruletree.jar -test path_to_skinTest -pathToConditions path_to_conditions 
 </code></pre>
+
 
 
 <h1>

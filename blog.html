@@ -284,7 +284,7 @@ We now run the Rule Tree learner with the following command:
 In a first step, the Rule Tree learner will divide the range of observed values of each variable into intervals. These
  intervals are reported in the file conditions.txt and will be used by the learner to construct boolean expressions.
  In this case, 2 conditions are contructed for the first, second, and third explanatory variables while the range of
- values of X4 is split into two intervals.
+ values of X4 is split into four intervals.
  
 <pre><code>$ less conditions.txt
 C1 : X1 in [ -7.0421 ; 0.5527080000000055 ]
@@ -352,8 +352,8 @@ We now run the Rule Tree learner with the following command:
 </code></pre>
 
 Note that the default the Rule Tree learner assigns equal weights or costs to false positive and
- false negative errors. In real-world problems, these errors usually present different costs. In the
- next example, perform a second run in another folder, this time we indicate different weights for 
+ false negative errors. However, in real-world problems, these errors usually present different costs. 
+ We now perform a second run in another folder, this time we indicate different weights for 
  the two errors in the properties file:
 <pre><code>$ cd secondFolder
 $ less skin.properties

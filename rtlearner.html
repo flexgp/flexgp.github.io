@@ -90,13 +90,14 @@ a binary classifier</h4>
 <a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test 
 the classifiers</h4>
 
-<p>The ruleTree learner provides functionality to obtain the accuracy, precision, recall, false positive rate,
+<p>The ruleTree learner provides functionality to obtain the accuracy, precision, recall, F-score, false positive rate,
 and false negative rate of the retrieved classfiers once the training is finished. To automatically test all the
 generated classifiers, type:</p>
 
 <pre><code>$ cd run_folder
 $ java -jar ruletree.jar -test path_to_your_data
 </code></pre>
+
 
 <h3>
 <a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link"></span></a>Running SR learner from Matlab</h3>
@@ -116,19 +117,20 @@ octicon-link"></span></a>Change the default parameters</h2>
 <p>To modify the default parameters of the ruleTree learner, it is necessary to append the flag <em>-properties</em>
  followed by the path of the properties file containing the desired parameters:
  
-<pre><code>$ java -jar ruleTree.jar -train path_to_your_data -minutes 10 -properties path_to_props_file
+<pre><code>$ java -jar ruletree.jar -train path_to_your_data -minutes 10 -properties path_to_props_file
 </code></pre>
  
 <p>The following properties file example specifies the population size, the features that will be
  considered during the learning process, the functions employed to generate GP trees, the tournament selection size,
  and the mutation rate.</p>
  
-<pre><code>pop_size = 1000
-terminal_set = X1 X3 X7 X8 X9 X12 X13 X17
+<pre><code>pop_size = 2000
 function_set = and or not
 tourney_size = 10
 mutation_rate = 0.1
 </code></pre>
+
+
 
 <h1>
 <a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h1>

@@ -340,17 +340,6 @@ $ head -n 161737 skinShuffle.data > skinTrain.csv
 $ tail -n 83320 skinShuffle.data > skinTest.csv
 </code></pre>
 
-We create a properties file that indicates a population size of 2000 as additional parameter:
-
-<pre><code>$ less skin.properties
-pop_size = 2000
-</code></pre>
-
-We now run the Rule Tree learner with the following command: 
-
-<pre><code>$ java -jar ruletree.jar -train path_to_skinTrain -minutes 60 -properties skin.properties
-</code></pre>
-
 Note that the default the Rule Tree learner assigns equal weights or costs to false positive and
  false negative errors. However, in real-world problems, these errors usually present different costs. 
  We now perform a second run in another folder, this time we indicate different weights for 
@@ -363,31 +352,28 @@ false_negative_weight = 0.9
 $ java -jar ruletree.jar -train path_to_skinTrain -minutes 60 -properties skin.properties
 </code></pre>
 
-The obtained models are then tested on unseen data, we report and compare the knee and most accutate
- models obtained with equal weights:
+The obtained models are then tested on unseen data, we report the knee and most accutate
+ models obtained with the modified weights:
 
 <pre><code>$ java -jar ruletree.jar -test path_to_skinTest -pathToConditions path_to_conditions 
 TESTING KNEE MODEL:
-RULE TREE: (or C3 C7)
-ACCURACY: 0.9110283979547042
-PRECISION: 0.9568862275449102
-RECALL: 0.9295267690529916
-F-SCORE: 0.94300809530599
-FALSE POSITIVE RATE: 0.15935828877005348
-FALSE NEGATIVE RATE: 0.07047323094700844
+RULE TREE: (or C7 C3)
+ACCURACY: 0.9134181469035045
+PRECISION: 0.9550560061799923
+RECALL: 0.9348920917711468
+F-SCORE: 0.9448664842639438
+FALSE POSITIVE RATE: 0.169137740566312
+FALSE NEGATIVE RATE: 0.06510790822885316
+
 
 TESTING MOST ACCURATE MODEL: 
 RULE TREE: (or C7 (not (and C5 C2)))
-ACCURACY: 0.9422086473719681
-PRECISION: 0.9585657124318312
-RECALL: 0.9689015201792671
-F-SCORE: 0.9637059040518764
-FALSE POSITIVE RATE: 0.15935828877005348
-FALSE NEGATIVE RATE: 0.03109847982073284
-</code></pre>
-
-and with the modified weights:
-<pre><code>$ java -jar ruletree.jar -test path_to_skinTest -pathToConditions path_to_conditions 
+ACCURACY: 0.9417426788286126
+PRECISION: 0.9566371021837967
+RECALL: 0.9705842319384159
+F-SCORE: 0.9635601999909915
+FALSE POSITIVE RATE: 0.169137740566312
+FALSE NEGATIVE RATE: 0.029415768061584066
 </code></pre>
 
 

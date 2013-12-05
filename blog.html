@@ -318,10 +318,6 @@ The Rule Tree learner only reports a model of minimal complexity that contains a
 </code></pre>
 
 
-
-
-
-
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Classification
  by Rule Trees: Skin Segmentation</h1>
@@ -344,38 +340,57 @@ $ head -n 161737 skinShuffle.data > skinTrain.csv
 $ tail -n 83320 skinShuffle.data > skinTest.csv
 </code></pre>
 
-We create a properties file that indicates a population size of 2000 as additional parameter :
+We create a properties file that indicates a population size of 2000 as additional parameter:
 
 <pre><code>$ less skin.properties
 pop_size = 2000
 </code></pre>
 
-We now run the Rule Tree learner with the following commad: 
+We now run the Rule Tree learner with the following command: 
 
 <pre><code>$ java -jar ruletree.jar -train path_to_skinTrain -minutes 60 -properties skin.properties
 </code></pre>
 
-
-In a first step, the Rule Tree learner will divide the range of observed values of each variable into intervals. These
- intervals are reported in the file conditions.txt and will be used by the learner to construct boolean expressions.
- In this case, 3 conditions are contructed for the first and second explanatory variables while the range of
- values of X3 is split into two intervals.
- 
-<pre><code>$ less conditions.txt
-C1 : X1 in [ 0.0 ; 23.04 ]
-C2 : X1 in [ 23.04 ; 181.7600000000001 ]
-C3 : X1 in [ 181.7600000000001 ; 256.00000000000017 ]
-C4 : X2 in [ 0.0 ; 79.36000000000003 ]
-C5 : X2 in [ 79.36000000000003 ; 222.72000000000014 ]
-C6 : X2 in [ 222.72000000000014 ; 256.00000000000017 ]
-C7 : X3 in [ 0.0 ; 148.48000000000008 ]
-C8 : X3 in [ 148.48000000000008 ; 256.00000000000017 ]
+Note that the default the Rule Tree learner assigns equal weights or costs to false positive and
+ false negative errors. In real-world problems, these errors usually present different costs. In the
+ next example, perform a second run in another folder, this time we indicate different weights for 
+ the two errors in the properties file:
+<pre><code>$ cd secondFolder
+$ less skin.properties
+pop_size = 2000
+false_positive_weight = 0.1
+false_negative_weight = 0.9
+$ java -jar ruletree.jar -train path_to_skinTrain -minutes 60 -properties skin.properties
 </code></pre>
 
-The obtained models are then tested on unseen data:
+The obtained models are then tested on unseen data, we report and compare the knee and most accutate
+ models obtained with equal weights:
 
 <pre><code>$ java -jar ruletree.jar -test path_to_skinTest -pathToConditions path_to_conditions 
+TESTING KNEE MODEL:
+RULE TREE: (or C3 C7)
+ACCURACY: 0.9110283979547042
+PRECISION: 0.9568862275449102
+RECALL: 0.9295267690529916
+F-SCORE: 0.94300809530599
+FALSE POSITIVE RATE: 0.15935828877005348
+FALSE NEGATIVE RATE: 0.07047323094700844
+
+TESTING MOST ACCURATE MODEL: 
+RULE TREE: (or C7 (not (and C5 C2)))
+ACCURACY: 0.9422086473719681
+PRECISION: 0.9585657124318312
+RECALL: 0.9689015201792671
+F-SCORE: 0.9637059040518764
+FALSE POSITIVE RATE: 0.15935828877005348
+FALSE NEGATIVE RATE: 0.03109847982073284
 </code></pre>
+
+and with the modified weights:
+<pre><code>$ java -jar ruletree.jar -test path_to_skinTest -pathToConditions path_to_conditions 
+</code></pre>
+
+
 
 
 

@@ -342,8 +342,7 @@ Note that the default the Rule Tree learner assigns equal weights or costs to fa
  false negative errors. However, in real-world problems, these errors usually present different costs. 
  We now perform a second run in another folder, this time we indicate different weights for 
  the two errors in the properties file:
-<pre><code>$ cd secondFolder
-$ less skin.properties
+<pre><code>$ less skin.properties
 pop_size = 2000
 false_positive_weight = 0.1
 false_negative_weight = 0.9
@@ -444,7 +443,7 @@ The obtained models are then tested on unseen data:
 
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Classification
- by Rule Trees: Skin Segmentation</h1>
+ by GP function: Skin Segmentation</h1>
 
 
 <p>Thee Skin Segmentation dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Skin+Segmentation">UCI 
@@ -458,45 +457,26 @@ $ head -n 161737 skinShuffle.data > skinTrain.csv
 $ tail -n 83320 skinShuffle.data > skinTest.csv
 </code></pre>
 
-
-<pre><code>$ cd secondFolder
-$ less skin.properties
+As for the Rule Tree classifier example, we modify the population size and the cost of the false positive and
+false negative errors. Additionally, 4 CPU threads are used to speedup the process:
+<pre><code>$ less skin.properties
 pop_size = 2000
 false_positive_weight = 0.1
 false_negative_weight = 0.9
-$ java -jar ruletree.jar -train path_to_skinTrain -minutes 60 -properties skin.properties
+$ java -jar gpfunction.jar -train path_to_skinTrain -minutes 60 -cpp 4 -properties skin.properties
 </code></pre>
+
 
 The obtained models are then tested on unseen data, we report the knee and most accutate
  models obtained with the modified weights:
 
-<pre><code>$ java -jar ruletree.jar -test path_to_skinTest -pathToConditions path_to_conditions 
+<pre><code>$ java -jar gpfunction.jar -test path_to_skinTest
 TESTING KNEE MODEL:
-RULE TREE: (or C7 C3)
-ACCURACY: 0.9134181469035045
-PRECISION: 0.9550560061799923
-RECALL: 0.9348920917711468
-F-SCORE: 0.9448664842639438
-FALSE POSITIVE RATE: 0.169137740566312
-FALSE NEGATIVE RATE: 0.06510790822885316
+
 
 TESTING MOST ACCURATE MODEL: 
-RULE TREE: (or C7 (not (and C5 C2)))
-ACCURACY: 0.9417426788286126
-PRECISION: 0.9566371021837967
-RECALL: 0.9705842319384159
-F-SCORE: 0.9635601999909915
-FALSE POSITIVE RATE: 0.169137740566312
-FALSE NEGATIVE RATE: 0.029415768061584066
+
 </code></pre>
-
-
-
-
-
-
-
-
 
 
 

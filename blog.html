@@ -412,6 +412,23 @@ $ tail -n466 banknoteShuffled.csv > banknoteTest.csv
 <pre><code>$ java -jar gpfunction.jar -train path_to_banknoteTrain -cv path_to_banknoteTrain -minutes 1
 </code></pre>
 
+We now show the classifiers forming the obtained nondominated solutions stored in the pareto.txt file. The files
+ contains the obtained nondominated models and their respective AUC when tested on the training set, the AUC when 
+ tested on the validation set, and the decision theshold. In this case the training and validation AUC is the same since
+ we did not use different data to train the classifiers and to set the thresholds.
+
+<pre><code>$ less pareto.txt
+(square X3),0.589,0.589,0.1
+X3,0.537,0.537,0.6
+(- X4 X1),0.894,0.894,0.6
+(- (- X4 X1) X1),0.930,0.930,0.6
+(- (cos X1) X1),0.916,0.916,0.4
+(+ (- (- X4 X1) X1) (sqrt X4)),0.933,0.933,0.6
+(- (- (- X4 X1) (mylog X1)) X1),0.934,0.934,0.7
+(- (sqrt (exp X4)) X1),0.932,0.932,0.5
+(+ (- (- X4 X1) X1) (cos (exp X3))),0.939,0.939,0.6
+</code></pre>
+
 
 The obtained models are then tested on unseen data:
 
@@ -430,28 +447,19 @@ The obtained models are then tested on unseen data:
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Classification
  by Rule Trees: Skin Segmentation</h1>
 
+
 <p>Thee Skin Segmentation dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Skin+Segmentation">UCI 
-Machine Learning repository website</a>. The Skin Segmentation is a binary classification problem composed of roughly 
- 250K exemplars, each described with a set of 3 features.</p>
- 
- We now report the steps neceassy to use the Rule Tree learner with this dataset. First, the original class labels
- (1 or 2) must be replaced with 0 or 1 values:
+Machine Learning repository website</a>. The steps explained in detail in the Rule Tree example are repeated in this
+example:</p>
  
 <pre><code>$ sed 's/1\r/0/g' skin.data > skin02.data
 $ sed 's/2\r/1/g' skin02.data > skin01.data
-</code></pre>
-
-Once the labels have been replaced, we shuffle the resulting dataset and perform a 0.66-0.33 split to obtain the
- training and test sets:
-<pre><code>$ sort --random-sort skin01.data > skinShuffle.data
+$ sort --random-sort skin01.data > skinShuffle.data
 $ head -n 161737 skinShuffle.data > skinTrain.csv
 $ tail -n 83320 skinShuffle.data > skinTest.csv
 </code></pre>
 
-Note that the default the Rule Tree learner assigns equal weights or costs to false positive and
- false negative errors. However, in real-world problems, these errors usually present different costs. 
- We now perform a second run in another folder, this time we indicate different weights for 
- the two errors in the properties file:
+
 <pre><code>$ cd secondFolder
 $ less skin.properties
 pop_size = 2000

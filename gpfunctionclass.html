@@ -81,13 +81,6 @@ or modify it manually:
 <pre><code>$ sudo nano /proc/sys/kernel/shmmax
 </code></pre>
 
-<p>The number of CPU threads employed in the training process must be specified after the -cpp flag. Additionally, it
- is necessary to create an auxiliary default folder in which temporary C++ files will be generated:</p>
-
-<pre><code>$ mkdir tempFiles
-$ java -jar gpfunction.jar -train path_to_your_data -minutes 10 -cpp 4
-</code></pre>
-
 
 <h2>
 <a name="step-3-running-flexgp" class="anchor" href="#step-3-running-flexgp"><span class="octicon 
@@ -104,9 +97,12 @@ class="octicon octicon-link"></span></a>Running GP Function classifier from the 
 <a name="model-the-data" class="anchor" href="#model-the-data"><span class="octicon octicon-link"></span></a>Model 
 the data</h4>
 
-<p>All you need to provide is the path to your dataset and the optimization time</p>
+<p>First, Additionally, it is necessary to create an auxiliary default folder in which temporary C++ files will be
+ generated. The parameters required to train the classifier are the path to your dataset, the optimization time,
+ and the number of CPU threads specified after the -cpp flag:</p>
 
-<pre><code>$ java -jar gpfunction.jar -train path_to_your_data -minutes 10 
+<pre><code>$ mkdir tempFiles
+$ java -jar gpfunction.jar -train path_to_your_data -minutes 10 -cpp 4
 </code></pre>
 
 <p>At the end of the run a set of files are generated:</p>

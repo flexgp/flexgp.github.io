@@ -412,10 +412,9 @@ $ tail -n466 banknoteShuffled.csv > banknoteTest.csv
 <pre><code>$ java -jar gpfunction.jar -train path_to_banknoteTrain -cv path_to_banknoteTrain -minutes 1
 </code></pre>
 
-We now show the classifiers forming the obtained nondominated solutions stored in the pareto.txt file. The files
- contains the obtained nondominated models and their respective AUC when tested on the training set, the AUC when 
- tested on the validation set, and the decision theshold. In this case the training and validation AUC is the same since
- we did not use different data to train the classifiers and to set the thresholds.
+We now show the solutions stored in the pareto.txt file. The file contains nondominated models and their respective
+ AUC when tested on the training set, the AUC when tested on the validation set, and the decision theshold. Note that
+ in this case, the same data is used for training and validation and thus the same AUC values are reported.
 
 <pre><code>$ less pareto.txt
 (square X3),0.589,0.589,0.1

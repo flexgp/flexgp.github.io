@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>SR learner</title>
+    <title>GP Function Classification</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -132,7 +132,7 @@ $ java -jar gpfunction.jar -test path_to_your_data
 
 <h3>
 <a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link">
-</span></a>Running SR learner from Matlab</h3>
+</span></a>Running GP Function learner from Matlab</h3>
 
 <p>To be done</p>
 
@@ -147,10 +147,10 @@ octicon-link"></span></a>Bells and whistles</h1>
 href="#step-4-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon 
 octicon-link"></span></a>1) Change the default parameters</h2>
 
-<p>To modify the default parameters of the SR learner, it is necessary to append the flag <em>-properties</em>
+<p>To modify the default parameters of the GP Function learner, it is necessary to append the flag <em>-properties</em>
  followed by the path of the properties file containing the desired parameters:
  
-<pre><code>$ java -jar sr.jar -train path_to_your_data -minutes 10 -cpp 4 -properties path_to_props_file
+<pre><code>$ java -jar gpfunction.jar -train path_to_your_data -minutes 10 -cpp 4 -properties path_to_props_file
 </code></pre>
  
 The following properties file example specifies the population size, the features that will be

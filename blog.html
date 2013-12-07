@@ -396,19 +396,10 @@ $ head -n905 banknoteShuffled.csv > banknoteTrain.csv
 $ tail -n466 banknoteShuffled.csv > banknoteTest.csv
 </code></pre>
 
+ <p>In this example, we employ the same data to train the classifiers and to set the decisions thresholds. We run the GP
+ function learner with the following command:</p>
 
-<p>This classification approach consists in evolving GP functions to tackle binary classification problems. A decision
- threshold is employed such that a prediction is positive if the outcome of the GP function is greater than the
- threshold and negative otherwise.</p>
- 
-<p>The training process is divided into two steps. First, a set of classifiers is evolved using the Area Under the ROC
- curve to drive the search. In a second step, the decision threshold is computed for each classifier. It is possible
- to use disjoint sets of data are used for the first (training set) and seconds steps (validation set).</p>
- 
- In this example, we employ the same data to train the classifiers and to set the decisions thresholds. We run the GP
- function learner with the following command:
-
-<pre><code>$ java -jar gpfunction.jar -train path_to_banknoteTrain -cv path_to_banknoteTrain -minutes 1
+<pre><code>$ java -jar gpfunction.jar -train path_to_banknoteTrain -cv path_to_banknoteTrain -minutes 20
 </code></pre>
 
 We now show the solutions stored in the pareto.txt file. The file contains nondominated models and their respective
@@ -416,15 +407,21 @@ We now show the solutions stored in the pareto.txt file. The file contains nondo
  in this case, the same data is used for training and validation and thus the same AUC values are reported.
 
 <pre><code>$ less pareto.txt
-(square X3),0.589,0.589,0.1
-X3,0.537,0.537,0.6
-(- X4 X1),0.894,0.894,0.6
-(- (- X4 X1) X1),0.930,0.930,0.6
-(- (cos X1) X1),0.916,0.916,0.4
-(+ (- (- X4 X1) X1) (sqrt X4)),0.933,0.933,0.6
-(- (- (- X4 X1) (mylog X1)) X1),0.934,0.934,0.7
-(- (sqrt (exp X4)) X1),0.932,0.932,0.5
-(+ (- (- X4 X1) X1) (cos (exp X3))),0.939,0.939,0.6
+X3,0.5377,0.5377,0.6
+(square X3),0.5893,0.5893,0.1
+(- X4 X1),0.8946,0.8946,0.6
+(- (- X4 X1) X1),0.9307,0.9307,0.6
+(- (sqrt (exp X4)) X1),0.9322,0.9322,0.5
+(- (- X4 X1) (+ X3 X2)),0.9373,0.9373,0.7
+(- (- (cos X3) X1) (+ X3 X2)),0.9985,0.9985,0.6
+(- (- (- (cube (cos (exp X3))) X1) X1) (+ X3 X2)),0.9985,0.9985,0.6
+(- (- (- (exp (exp (- (sin X1) (exp (- X3 X4))))) X1) (+ X3 X2)) X1),0.9996,0.9996,0.6
+(- (- (- (exp (- (sin X1) (exp X3))) X1) X1) (+ X3 X2)),0.9994,0.9994,0.6
+(- (- (- (exp (- (sin X1) (exp (- X3 X2)))) X1) X1) (+ X3 X2)),0.9995,0.9995,0.6
+(- (sin X4) X1),0.9179,0.9179,0.4
+(- (- (- (exp (exp (- (sin X1) (exp (- X3 (- (sqrt (exp X4)) X1)))))) X1) (+ X3 X2)) X1),0.9998,0.9998,0.5
+(- (- (- (exp (exp (- (sin X1) (exp (- X3 (- (- (- (exp X4) X1) X1) (- (- (exp (- (sin X1) (exp X3))) X1) X1))))))) X1) (+ X3 X2)) X1),1.0,1.0,0.6
+(- (- (- (exp (- (- (sin X1) (exp (- X3 (mydivide (sin X1) (square X3))))) (+ X3 X2))) X1) X1) (+ X3 X2)),0.9999,0.9999,0.6
 </code></pre>
 
 
@@ -433,11 +430,16 @@ The obtained models are then tested on unseen data:
 <pre><code>$ java -jar gpfunction.jar -test path_to_banknoteTest
 </code></pre>
 
+We report the results for the model presenting the higher Area under the ROC curve with respect to the validation set:
 <pre><code>
-
+GP FUNCTION: (- (- (- (exp (exp (- (sin X1) (exp (- X3 (- (- (- (exp X4) X1) X1) (- (- (exp (- (sin X1) (exp X3))) X1) X1))))))) X1) (+ X3 X2)) X1)
+ACCURACY: 0.9892703862660944
+PRECISION: 0.9731182795698925
+RECALL: 1.0
+F-SCORE: 0.9863760217983651
+FALSE POSITIVE RATE: 0.017543859649122806
+FALSE NEGATIVE RATE: 0.0
 </code></pre>
-
-
 
 
 

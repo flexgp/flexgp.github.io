@@ -116,12 +116,14 @@ $ java -jar gpfunction.jar -train path_to_your_data -minutes 10 -cpp 4
 <p>At the end of the run a set of files are generated:</p>
 
 <ol>
+<li><p><strong>bestCrossValidation.txt</strong>: model with higest area under the ROC curve when evaluated on the validation set.</p></li>
 <li><p><strong>pareto.txt</strong>: models forming the Pareto Front (accuracy vs model complexity).</p></li>
 <li><p><strong>leastComplex.txt</strong>: least complex model of the Pareto Front.</p></li>
 <li><p><strong>mostAccurate.txt</strong>: most accurate model of the Pareto Front.</p></li>
 <li><p><strong>knee.txt</strong>: model at the knee of the Pareto Front.</p></li>
 <li><p><strong>bestModelGeneration.txt</strong>: most accurate model per generation.</p></li>
 </ol>
+
 
 <h4><a name="test-the-models" class="anchor" href="#test-the-models"><span class="octicon octicon-link"></span></a>Test 
 the models</h4>
@@ -131,8 +133,10 @@ and false negative rate of the retrieved classfiers once the training is finishe
 generated classifiers, type:</p>
 
 <pre><code>$ cd run_folder
-$ java -jar gpfunction.jar -test path_to_your_data
+$ java -jar gpfunction.jar -test path_to_test_data
 </code></pre>
+
+
 
 <h3>
 <a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link">

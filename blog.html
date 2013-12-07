@@ -442,8 +442,7 @@ FALSE NEGATIVE RATE: 0.0
 
 
 <p>Thee Skin Segmentation dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Skin+Segmentation">UCI 
-Machine Learning repository website</a>. The steps explained in detail in the Rule Tree example are repeated in this
-example:</p>
+Machine Learning repository website</a>. We repeat the steps explained in detail in the Rule Tree example:</p>
  
 <pre><code>$ sed 's/1\r/0/g' skin.data > skin02.data
 $ sed 's/2\r/1/g' skin02.data > skin01.data
@@ -462,7 +461,7 @@ $ java -jar gpfunction.jar -train path_to_skinTrain -minutes 60 -cpp 4 -properti
 </code></pre>
 
 
-The obtained models are then tested on unseen data, we report the knee and most accutate
+The obtained models are then tested on unseen data, we report the knee, the most accurate
  models obtained with the modified weights:
 
 <pre><code>$ java -jar gpfunction.jar -test path_to_skinTest
@@ -485,6 +484,15 @@ FALSE POSITIVE RATE: 0.3664747950462236
 FALSE NEGATIVE RATE: 0.016137082016303445
 </code></pre>
 
+The Pareto Front contains another model presenting higher accuracy:
+<code><pre>GP FUNCTION: (* (- X1 X3) (sqrt X1))
+ACCURACY: 0.9503600576092175
+PRECISION: 0.9907370754492915
+RECALL: 0.9462954280788252
+F-SCORE: 0.9680064358426932
+FALSE POSITIVE RATE: 0.034013605442176874
+FALSE NEGATIVE RATE: 0.05370457192117482
+</code></pre>
 
 
 <h1>

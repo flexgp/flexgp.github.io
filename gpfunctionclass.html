@@ -106,11 +106,11 @@ class="octicon octicon-link"></span></a>Running GP Function classifier from the 
 the data</h4>
 
 <p>First, it is necessary to create an auxiliary folder in which temporary C++ files will be
- generated. The parameters required to train the classifier are the path to your dataset, the optimization time,
- and the number of CPU threads specified after the -cpp flag:</p>
+ generated. The parameters required to train the classifier are the path to your dataset, the path to the validation
+ set, and the optimization time:</p>
 
 <pre><code>$ mkdir tempFiles
-$ java -jar gpfunction.jar -train path_to_your_data -minutes 10 -cpp 4
+$ java -jar gpfunction.jar -train path_to_train_data -train path_to_validation_data -minutes 10
 </code></pre>
 
 <p>At the end of the run a set of files are generated:</p>
@@ -153,7 +153,18 @@ octicon-link"></span></a>Bells and whistles</h1>
 <h2>
 <a name="step-4-speeding-up-your-runs-with-c-optimized-execution" class="anchor" 
 href="#step-4-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon 
-octicon-link"></span></a>1) Change the default parameters</h2>
+octicon-link"></span></a>1) Specify the number of CPU threads</h2>
+
+<p>To speedup the training process, append the <em>-cpp</em> flag followed by the number of CPU threads that will be employed 
+ to evaluate the candidate solutions (4 in the example below):
+ 
+<pre><code>$ java -jar gpfunction.jar -train path_to_your_data -minutes 10 -cpp 4
+</code></pre>
+
+<h2>
+<a name="step-4-speeding-up-your-runs-with-c-optimized-execution" class="anchor" 
+href="#step-4-speeding-up-your-runs-with-c-optimized-execution"><span class="octicon 
+octicon-link"></span></a>2) Change the default parameters</h2>
 
 <p>To modify the default parameters of the GP Function learner, it is necessary to append the flag <em>-properties</em>
  followed by the path of the properties file containing the desired parameters:
@@ -165,7 +176,6 @@ The following properties file example specifies the population size, the feature
  considered during the learning process, the functions employed to generate GP trees, the tournament selection size,
  and the mutation rate.
  
-  </p>
 <pre><code>pop_size = 1000
 terminal_set = X1 X3 X7 X8 X9 X12 X13 X17
 function_set = + - * mydivide exp mylog sqrt square cube quart sin cos

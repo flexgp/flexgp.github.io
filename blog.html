@@ -38,7 +38,7 @@ and analyze their accuracy.</p>
 
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon 
-octicon-link"></span></a>Predicting the quality of wine</h1>
+octicon-link"></span></a>Symbolic Regression Learner: Predicting the quality of wine</h1>
 
 <p>The Wine Quality dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality">UCI 
 Machine Learning repository website</a>. This problem consists in modeling the quality (a grade from 1 to 10) of a 
@@ -124,7 +124,8 @@ MAE fused Model: 0.5596161698652511
 
 
 
-<h1> <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Kaggle bond price dataset</h1>
+<h1> <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon
+ octicon-link"></span></a>Symbolic Regression Learner: Kaggle bond price dataset</h1>
 
 This dataset can be downloaded from the <a href="http://www.kaggle.com/c/benchmark-bond-trade-price-challenge">Kaggle 
 bond trade price challenge website</a>. Some preprocessing steps are required in this case to adapt the data to a 
@@ -156,7 +157,8 @@ is necessary to create an auxiliary folder in which temporary C++ files will be 
 $ java -jar sr.jar -train path_to_kaggle_data -minutes 60 -cpp 4
 </code></pre>
 
-<p>At the end of the run we measure the accuracy of the knee, least complex and most accurate models and the fused Pareto Front Model:</p>
+<p>At the end of the run we measure the accuracy of the knee, least complex and most accurate models and the fused
+Pareto Front Model:</p>
 
 <pre><code>$ java -jar sr.jar -test path_to_kaggle_data -integer false -scaled knee.txt 
 (0.0986682027578354 .* (+ (+ (+ (+ X20 X10) X50) (+ (mysqrt X30) (mysqrt X30))) (+ (+ X8 (+ X15 X10)) (+ (+ (+ X8 X10) X7) (+ X35 X10))))) + -0.9139559864997864
@@ -183,7 +185,8 @@ MAE fused Model: 0.5816370761201752
 
 
 <h1>
-<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>NOx Emissions dataset</h1>
+<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Symbolic Regression
+Learner:  NOx Emissions dataset</h1>
 
 The data is split into training and test set. We first retrieve models from the training set: 
 <pre><code>$ java -jar sr.jar -train path_to_NOx_train_data -minutes 60 
@@ -212,8 +215,6 @@ MAE: 0.14965293512345454
 MSE fused Model: 0.03950888612009337
 MAE fused Model: 0.15696745165002576
 </code></pre>
-
-
 
 
 <h1>

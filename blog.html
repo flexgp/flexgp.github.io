@@ -373,16 +373,6 @@ FALSE NEGATIVE RATE: 0.029415768061584066
 </code></pre>
 
 
-
-
-
-
-
-
-
-
-
-
 <h1>
 <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Classification
  by GP function: Banknote Authentication</h1>
@@ -474,27 +464,23 @@ The obtained models are then tested on unseen data, we report the knee and most 
 
 <pre><code>$ java -jar gpfunction.jar -test path_to_skinTest
 TESTING KNEE MODEL:
-
+GP FUNCTION: (- X1 X3)
+ACCURACY: 0.9381180988958233
+PRECISION: 0.9853514847543985
+RECALL: 0.9359356331573933
+F-SCORE: 0.9600080666428804
+FALSE POSITIVE RATE: 0.053491482062910635
+FALSE NEGATIVE RATE: 0.06406436684260673
 
 TESTING MOST ACCURATE MODEL: 
-
+GP FUNCTION: (* (- (* (- X1 X3) X2) (- (- (mydivide X1 (- X2 X3)) X3) X1)) X1)
+ACCURACY: 0.9115458473355736
+PRECISION: 0.9116694928318175
+RECALL: 0.9838629179836965
+F-SCORE: 0.9463914226276204
+FALSE POSITIVE RATE: 0.3664747950462236
+FALSE NEGATIVE RATE: 0.016137082016303445
 </code></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

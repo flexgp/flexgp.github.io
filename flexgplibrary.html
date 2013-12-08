@@ -43,12 +43,12 @@ octicon-link"></span></a>Overview</h1>
  in cloud environments:</p>
 
 <ol>
-<li><p><strong>Auto-configuration of the core learner</strong>: allow to explore different input parameters.</p></li>
+<li><p><strong>Auto-configuration of the core learner</strong>: exploration of input parameter space.</p></li>
 <li><p><strong>Communication layer</strong>: message passing between cloud nodes to enable migrations.</p></li>
 <li><p><strong>Runtime management and log generation</strong>: scheduling of learner and network tasks and log of received messages and intermediate results.</p></li>
 </ol>
 
-
+
 <h1><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
 octicon-link"></span></a>Auto-configuration of the core learner</h1>
 
@@ -75,28 +75,39 @@ octicon-link"></span></a>Communication layer</h1>
 FlexGP provides a TCP/IP communication layer that allows to pass messages between cloud nodes running the FlexGP
  library. This way, the FlexGP library enables migrations in cloud environments.
 
-1) Interactions with Cloud server
 
-The communication layer relies on two cloud server utilities provided by standard cloud management tools such
- as euca-tools (link here) or amazon-ec2:
 
-1) Self IP discovery: each cloud node running the FlexGP library self identifies itself at the beginning of the run
-2) IP discovery of other FlexGP nodes: each nodes refreshes periodically the list of IP directions started with the
- same security keypair. This allows to detect when extra nodes are added to the FlexGP run, providing elasticity to
- FlexGP.
+<h2><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
+octicon-link"></span></a>Interactions with Cloud server</h2>
 
-2) Message Passing
+<p>The communication layer relies on two cloud server utilities provided by standard cloud management tools such
+ as euca-tools (link here) or amazon-ec2:</p>
 
-Messages are passed via TCP/IP protocol. FlexGP abtracts the concept of message in such a way that it is possible to
+<ol>
+<li><p><strong>Self IP discovery</strong>: each cloud node running the FlexGP library self
+ identifies itself at the beginning of the run.</p></li>
+<li><p><strong>IP discovery of other FlexGP nodes</strong>: each node refreshes periodically the list of IP directions
+ started with the same security keypair. This allows to detect when extra nodes are added to a FlexGP run, thus providing
+ elasticity to FlexGP.</p></li>
+</ol>
+
+
+<h2><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
+octicon-link"></span></a>Message Passing</h2>
+
+<p>Messages are passed via TCP/IP protocol. FlexGP abtracts the concept of message in such a way that it is possible to
  create, send, and receive different types of messages. In particular, the current FlexGP version employs two kinds of
- messages:
+ messages:</p>
 
-1) Broadcast Messages: Every time a nodes refreshes its list of Ips, it pings all the Ips in the new list and filters
+<ol>
+<li><p><strong>Broadcast Messages</strong>: Every time a nodes refreshes its list of Ips, it pings all the Ips in the new list and filters
  unresponsive nodes, i.e. nodes that did not reply to the ping. Such broadcast signals are used to maintain a list of
- responsive or “good” IP directions.
-2) Migrant Messages: this functionality allows FlexGP nodes to perform migration. FlexGP provides an abstract
+ responsive or “good” IP directions.</p></li>
+<li><p><strong>Migrant Messages</strong>: this functionality allows FlexGP nodes to perform migration. FlexGP provides an abstract
  Migrant Message class that needs to be extended and customized for each EC learner. This customization is necessary
- since different learners employ different representations.
+ since different learners employ different representations.</p></li>
+</ol>
+
 
 <h1><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
 octicon-link"></span></a>Runtime management and log generation</h1>

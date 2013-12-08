@@ -1,1 +1,114 @@
-a
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>FlexGP by flexgp</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>FlexGP</h1>
+        <p>Tutorial and Blog</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/flexgp" class="button fork"><strong>View On GitHub</strong></a>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="flexgp-flexible-machine-learning-with-genetic-programming" class="anchor" href="#flexgp-flexible-machine-learning-with-genetic-programming"><span
+ class="octicon octicon-link"></span></a>FlexGP: the Java library</h1>
+
+<h1><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
+octicon-link"></span></a>Overview</h1>
+
+FlexGP is a Java library that offers three services that simplify the deployment of EC algorithms in cloud environments.
+ The philosophy of FlexGP is to facilitate the exploitation of the embarrassingly parallelism of Evolutionary Computation algorithms. In fact, the parallelism can be exploited at multiple levels:</p>
+<p>Run: several replicas of the algorithm can be executed in a concurrent manner with or without changes in the parameters of the algorithm.</p>
+<p>Data: ensemble approaches benefit from the the data-level parallelism by running concurrently EC instances that learn from different smaller subsets of the data.</p>
+<p>Populations: the population level parallelism can be exploited with the implementation of an island model in which disjoint sets of individuals evolve independently with the exception of infrequent migrations (exchanges of individuals)</p>
+<p>Evaluation: the evaluation of individuals of the same population can be performed simultaneously through the implementation of a Master-Worker model. Alternatively, the evaluation level parallelism can also be exploited by computing the predictions of a given model for independent test cases in parallel.</p>
+<p><img src="multiLevelPar2.png" alt="Multi-level parallelism provided by FlexGP"></p>
+
+While the implementation of the evaluation level parallelism depends on each specific learner, the first three levels of parallelism are generalizable for any EC algorithm. FlexGP offers the three following services:
+
+<li><p><strong>Auto-configuration of the core learner</strong>: allow to explore different input parameters.</p></li>
+<li><p><strong>Communication layer</strong>: message passing between cloud nodes to enable migrations.</p></li>
+<li><p><strong>Runtime management and log generation</strong>: scheduling of learner and network tasks and log of received messages and intermediate results.</p></li>
+
+
+
+<h1><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
+octicon-link"></span></a>Auto-configuration of the core learner</h1>
+
+FlexGP provides an auto-configuration service that allows to automatically explore different input parameters for a
+ given learner, thus exploiting the run level parallelism. Examples of these parameters are the crossover and mutation
+ rate, the population size etc. 
+ 
+The auto-configuration service also enables to learn from a subset of the data. Therefore, FlexGP relies on an ensemble
+ approach in which each EC instance learns from a sub-sample of the exemplars and explanatory variables of the data.
+ This approach can be graphically depicted as to sample both from the rows (exemplars) and columns (variables) of the
+ training set. We have demonstrated that adopting this ensemble strategy provides robustness to our runs (see GECCO
+ 2013, EuroGP 2014). 
+
+The auto-configuration of each learner relies on two files containing the specification of the parameters in Factorize
+ syntax. These two files need to be provided by the user since they are specific of each learner:
+
+1. The first files specifies:
+- the values of fixed arguments such as dataset or number of threads.
+- the parameters that will be factored: these parameters will be explored in the cloud runs
+
+2. In the second file, the possible values of the parameters are specified using the Factorize syntax. 
+
+For further details of the Factorize Syntax and examples of use, please visit the this link. 
+
+
+<h1><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
+octicon-link"></span></a>Communication layer</h1>
+
+<h1><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
+octicon-link"></span></a>Runtime management and log generation</h1>
+
+
+<h1><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
+octicon-link"></span></a>Support or Contact</h1>
+
+<p>This page has been created by the Any-scale Learning For All (ALFA) group at MIT. Please contact us at: <a href="mailto:flexgp@csail.mit.edu">flexgp@csail.mit.edu</a> </p>
+
+<p>author: <a href="https://github.com/ignacioarnaldo" class="user-mention">@ignacioarnaldo</a></p>
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("flexgp");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

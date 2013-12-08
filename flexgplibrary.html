@@ -39,20 +39,13 @@
 <h1><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
 octicon-link"></span></a>Overview</h1>
 
-FlexGP is a Java library that offers three services that simplify the deployment of EC algorithms in cloud environments.
- The philosophy of FlexGP is to facilitate the exploitation of the embarrassingly parallelism of Evolutionary Computation algorithms. In fact, the parallelism can be exploited at multiple levels:</p>
-<p>Run: several replicas of the algorithm can be executed in a concurrent manner with or without changes in the parameters of the algorithm.</p>
-<p>Data: ensemble approaches benefit from the the data-level parallelism by running concurrently EC instances that learn from different smaller subsets of the data.</p>
-<p>Populations: the population level parallelism can be exploited with the implementation of an island model in which disjoint sets of individuals evolve independently with the exception of infrequent migrations (exchanges of individuals)</p>
-<p>Evaluation: the evaluation of individuals of the same population can be performed simultaneously through the implementation of a Master-Worker model. Alternatively, the evaluation level parallelism can also be exploited by computing the predictions of a given model for independent test cases in parallel.</p>
-<p><img src="multiLevelPar2.png" alt="Multi-level parallelism provided by FlexGP"></p>
+FlexGP is a Java library that offers three services that simplify the deployment of EC algorithms in cloud environments:
 
-While the implementation of the evaluation level parallelism depends on each specific learner, the first three levels of parallelism are generalizable for any EC algorithm. FlexGP offers the three following services:
-
+<ol>
 <li><p><strong>Auto-configuration of the core learner</strong>: allow to explore different input parameters.</p></li>
 <li><p><strong>Communication layer</strong>: message passing between cloud nodes to enable migrations.</p></li>
 <li><p><strong>Runtime management and log generation</strong>: scheduling of learner and network tasks and log of received messages and intermediate results.</p></li>
-
+</ol>
 
 
 <h1><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon

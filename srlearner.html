@@ -114,26 +114,14 @@ training and test sets to obtain predictions in the original scale:</p>
 $ java -jar sr.jar -normTest path_to_norm_test_data -pathToTrainBounds path_to_tr_bounds -pathToTestBounds path_to_test_bounds
 </code></pre>
 
-<p>It is also possible to evaluate the different models separately and to specify whether the predictions should be rounded
- to the nearest integer value before computing the errors with the additional <em>-integer</em> flag. To test the
- models saved in files 1) to 5), do:</p>
-
-<pre><code>$ java -jar sr.jar -test path_to_your_data -integer true -scaled model_file 
-</code></pre>
-
-<p>To obtain the MSE of the fused model of the Pareto Front:</p>
-
-<pre><code>$ java -jar sr.jar -test path_to_your_data -integer false -fused model_file 
-</code></pre>
-
 <h3>
-<a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span class="octicon octicon-link"></span></a>Running SR learner from Matlab</h3>
+<a name="running-flexgp-from-matlab" class="anchor" href="#running-flexgp-from-matlab"><span
+class="octicon octicon-link"></span></a>Running SR learner from Matlab</h3>
 
 <p>To be done</p>
 
 
-<h1>
-<a name="bellsandwhistles" class="anchor" href="#tutorial"><span class="octicon 
+<h1><a name="bellsandwhistles" class="anchor" href="#tutorial"><span class="octicon 
 octicon-link"></span></a>Bells and whistles</h1>
 
 <h2>

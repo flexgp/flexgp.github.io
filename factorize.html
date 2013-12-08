@@ -38,7 +38,7 @@ href="#flexgp-machine-learning-with-genetic-programming"><span class="octicon
 octicon-link"></span></a>Setting learner autoconfiguration with the Factorize syntax</h1>
 
 The Factorize syntax has been designed to specify the spectrum of possible values of the input parameters of any
-EC learner. The proposed syntax is aimed to be simple and intuitive. 
+GP-based learner. The proposed syntax is aimed to be simple and intuitive. 
 
 Note: all the brackets, words, numbers, and colons used in the following examples are separated with spaces. 
 
@@ -50,16 +50,20 @@ The parameters of the learners can be whether fixed or factorized. The syntax em
 <pre><code>learner parameter_name value
 </code></pre>
 
-<h2><a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Example:</h2>
+<p>Example:</p>
 
-<pre><code>learner threads 4
+<pre><code>
 </code></pre>
 
 The following syntax is employed to set the parameters that will be factored:
 
-<pre><code>factorizedParams{selection,mutation_rate,crossover_rate,max_generation}
+<pre><code>factorizedParams{parameter_name_1,...,parameter_name_N}
 </code></pre>
 
+<p>Example:</p>
+
+<pre><code>learner threads 4factorizedParams{selection,mutation_rate,crossover_rate,max_generation}
+</code></pre>
 
 
 <h1><a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Specifying possible

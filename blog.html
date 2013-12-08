@@ -229,48 +229,46 @@ The Million Song dataset is available at the <a href="http://archive.ics.uci.edu
 The dataset is composed of more than 500K songs, each described with a set of 90 features.
 
 The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account
-to perform the data split. In this example, we normalize the data before starting the training process:
+to perform the data split. In this example, we normalize the both the train and test data before starting the training
+process:
 
-<pre><code>$ java -jar sr.jar -normalizeData path_to_data -newPath path_to_normalized_data -pathToBounds path_to_variable_bounds
+<pre><code>$ java -jar sr.jar -normalizeData path_to_msd_train_data -newPath path_to_msd_norm_train -pathToBounds path_to_train_bounds
+$ java -jar sr.jar -normalizeData path_to_msd_test_data -newPath path_to_msd_norm_test -pathToBounds path_to_test_bounds
 </code></pre>
 
 Once the data is normalized, we retrieve models from the training set. In the following example, we create an auxiliary 
 folder where the C++ temporary files will be generated and specify a 8-threaded C++ optimized evaluation. 
 
 <pre><code>$ mkdir tempFiles
-$ java -jar sr.jar -train path_to_msd_norm_train -minutes 60 -cpp 8
+$ java -jar sr.jar -train path_to_msd_norm_train -minutes 60 -cpp 4
 </code></pre>
 
-In this example, 306 generations were executed with a population size of 1000. 
-Therefore, 306(generations)*1000(population size)*370K(exemplars) = 1.13x10^11 model evaluations 
-were performed in the process. 
 
-<p>The obtained models are then tested on unseen data. Note that since both explanatory variables and targets have been
+<p>The obtained models are then tested on normalized unseen data. Note that since both explanatory variables and targets have been
  previously normalized, we specify the path to the stored min and max bounds necessary to provide predictions in the
  original scale:</p>
 
 
-<pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled knee.txt 
-(0.0041587599553168 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ X15 X3) (+ X6 X18)) (+ X6 X6))) (+ (+ X6 (+ X6 X3)) (+ (+ (+ X6 (+ X15 X6)) (+ X18 (+ X6 (+ X71 X6)))) (+ (+ X6 X6) (+ X6 X18)))))) + 1994.8900146484375000
-MSE: 113.99467981257321
-MAE: 8.627577118313159
-</code></pre>
+<pre><code>$ java -jar sr.jar -normTest path_to_msd_norm_test -pathToTrainBounds path_to_tr_bounds -pathToTestBounds path_to_test_bounds
 
-<pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled leastComplex.txt 
-(-0.0002395899937255 .* X78) + 1995.7399902343750000
-MSE: 119.42827020695042
-MAE: 8.797266692698164
-</code></pre>
+TESTING KNEE MODEL:
+(0.2497919946908951 .* (+ (* (* (log X88) X2) X6) (+ (+ X1 (* (log (quart X48)) X3)) X1))) + 0.8184109926223755
+MSE: 95.09644014969908
+MAE: 6.866209679535639
 
-<pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled mostAccurate.txt 
-(0.0027921800501645 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ (+ X15 X6) X3) (+ X6 X18)) (+ (+ (+ (+ X6 X6) (+ X6 (+ X6 X89))) (+ X6 X6)) (+ (+ (+ X6 X6) X80) X6)))) (+ (+ X6 X3) (+ (+ (+ (+ (+ (+ X15 X6) (+ (+ X6 (+ X6 X6)) X18)) (+ (+ X6 X6) (+ X6 X18))) X16) (+ X18 (+ (+ (+ (+ X6 X6) X18) (+ X3 (+ X6 X6))) (+ X71 (+ X3 X16))))) (+ X18 (+ (+ (+ (+ X6 X6) (+ (+ X6 X6) (+ (+ X6 (+ X6 X6)) (+ (+ (+ (+ (+ X3 (+ (+ X6 X6) X6)) (+ (+ X6 X2) X18)) (+ X6 X6)) X6) (+ X6 (+ X80 X18)))))) (+ (+ X3 (+ X6 X6)) (+ (+ X6 X2) X18))) (+ (+ X6 (+ X3 (+ (+ X6 X6) (+ X6 (+ X6 X3))))) X6))))))) + 1994.4200439453125000
-MSE: 112.28694845763374
-MAE: 8.544445529090199
-</code></pre>
+TESTING MOST ACCURATE MODEL: 
+(0.5029709935188293 .* (+ (* (* (* (+ (* (log X28) X3) (* (+ (* (+ (* (+ (+ (* X1 (log X1)) (* (log X6) X3)) (+ (+ (+ X13 (* (log (quart X32)) X3)) (+ X36 (log (* (+ (+ X1 (+ (quart X32) (* (log (quart X32)) X3))) X1) X1)))) (log (* (+ (+ X1 (* (log (quart X32)) X3)) X1) X73)))) X6) (* (+ (+ (* X1 X35) (+ X28 (* (log X13) X3))) X1) X1)) X3) (+ (* X1 X1) (* (+ (+ X1 (* (log X76) X2)) X1) X1))) X3)) X12) X78) X35) (+ (* (* (+ X25 (* (log X61) X2)) X78) X35) (* (log X1) X1)))) + 1.1432499885559082
+MSE: 90.53336481890285
+MAE: 6.63900995325159
 
-<pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -fused fusedModel.txt
-MSE fused Model: 112.30305544709098
-MAE fused Model: 8.54126317844592
+TESTING SIMPLEST MODEL: 
+(-0.0306775998324156 .* X78) + 0.8838499784469604
+MSE: 112.46824021812294
+MAE: 7.771649342527974
+
+TESTING FUSED MODEL:
+MSE fused Model: 90.53336481890285
+MAE fused Model: 6.63900995325159
 </code></pre>
 
 

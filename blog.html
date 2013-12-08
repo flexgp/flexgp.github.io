@@ -229,18 +229,26 @@ The Million Song dataset is available at the <a href="http://archive.ics.uci.edu
 The dataset is composed of more than 500K songs, each described with a set of 90 features.
 
 The train/test strategy is repeated in this case. Note that the so-called producer effect has been taken into account
-to perform the data split. We first retrieve models from the training set. In the following example, we create an auxiliary 
+to perform the data split. In this example, we normalize the data before starting the training process:
+
+<pre><code>$ java -jar sr.jar -normalizeData path_to_data -newPath path_to_normalized_data -pathToBounds path_to_variable_bounds
+</code></pre>
+
+Once the data is normalized, we retrieve models from the training set. In the following example, we create an auxiliary 
 folder where the C++ temporary files will be generated and specify a 8-threaded C++ optimized evaluation. 
 
 <pre><code>$ mkdir tempFiles
-$ java -jar sr.jar -train path_to_msd_train_data -minutes 60 -cpp 8
+$ java -jar sr.jar -train path_to_msd_norm_train -minutes 60 -cpp 8
 </code></pre>
 
 In this example, 306 generations were executed with a population size of 1000. 
 Therefore, 306(generations)*1000(population size)*370K(exemplars) = 1.13x10^11 model evaluations 
 were performed in the process. 
 
-The obtained models are then tested on unseen data:
+<p>The obtained models are then tested on unseen data. Note that since both explanatory variables and targets have been
+ previously normalized, we specify the path to the stored min and max bounds necessary to provide predictions in the
+ original scale:</p>
+
 
 <pre><code>$ java -jar sr.jar -test path_to_msd_test_data -integer true -scaled knee.txt 
 (0.0041587599553168 .* (- (- (- (- (- (- (- (- X52 (- (+ X6 X6) X85)) X57) (+ X3 X6)) X75) X75) X67) (+ (+ (+ X15 X3) (+ X6 X18)) (+ X6 X6))) (+ (+ X6 (+ X6 X3)) (+ (+ (+ X6 (+ X15 X6)) (+ X18 (+ X6 (+ X71 X6)))) (+ (+ X6 X6) (+ X6 X18)))))) + 1994.8900146484375000

@@ -55,12 +55,6 @@ octicon-link"></span></a>Auto-configuration of the core learner</h1>
 <p>FlexGP provides an auto-configuration service that allows to automatically explore the input parameters space of a
  given learner. Examples of these parameters are the crossover and mutation rate, or the population size among 
  many others.</p>
- 
-<p>The auto-configuration service also enables to learn from a subset of the data. Therefore, FlexGP relies on an ensemble
- approach in which each EC instance learns from a sub-sample of the exemplars and explanatory variables of the data.
- This approach can be graphically depicted as to sample both from the rows (exemplars) and columns (variables) of the
- training set. We have demonstrated that adopting this ensemble strategy provides robustness to our runs (see GECCO
- 2013, EuroGP 2014).</p> 
 
 <p>The auto-configuration of each learner relies on two files containing the specification of the parameters in Factorize
  syntax. These two files need to be provided by the user since they are specific of each learner:</p>

@@ -100,9 +100,9 @@ octicon-link"></span></a>Message Passing</h2>
  messages:</p>
 
 <ol>
-<li><p><strong>Broadcast Messages</strong>: Every time a nodes refreshes its list of Ips, it pings all the Ips in the new list and filters
- unresponsive nodes, i.e. nodes that did not reply to the ping. Such broadcast signals are used to maintain a list of
- responsive or “good” IP directions.</p></li>
+<li><p><strong>Broadcast Messages</strong>: Every time a nodes refreshes its list of IPs, it pings all the retrieved
+ IPs and filters unresponsive nodes, i.e. nodes that did not reply to the ping message. Such broadcast signals are used
+ to maintain a list of responsive or “good” IP directions.</p></li>
 <li><p><strong>Migrant Messages</strong>: this functionality allows FlexGP nodes to perform migration. FlexGP provides an abstract
  Migrant Message class that needs to be extended and customized for each EC learner. This customization is necessary
  since different learners employ different representations.</p></li>

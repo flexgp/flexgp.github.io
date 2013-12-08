@@ -124,6 +124,40 @@ MAE fused Model: 0.5596161698652511
 
 
 
+<h1><a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Symbolic Regression
+Learner:  NOx Emissions dataset</h1>
+
+The data is split into training and test set. We first retrieve models from the training set: 
+<pre><code>$ java -jar sr.jar -train path_to_NOx_train_data -minutes 60 
+</code></pre>
+
+Then, the obtained models are tested on the test set:
+<pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -scaled knee.txt 
+(0.3503123449969823 .* (* (- X6 (* X11 (* X11 (- (- (* X18 X11) (- X13 X9)) X14)))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (* X14 X13)) (mysqrt (mysqrt X3))) (square (- (cube X15) X3)))))) + 0.0666665555347619
+MSE: 0.03866067788176831
+MAE: 0.15697528915065745
+</code></pre>
+
+<pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -scaled leastComplex.txt 
+(0.3588259382986629 .* X13) + 0.0677718532771849
+MSE: 0.05669892879042211
+MAE: 0.18320088883003482
+</code></pre>
+
+<pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -scaled mostAccurate.txt 
+(0.3293701574352099 .* (* (- X6 (* X11 (* X11 (* X11 (sin (sin (- (- X18 (- X13 X9)) X14))))))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (- (mysqrt (mysqrt (- (* (- X13 (* X12 (mysqrt (- (cube (* (exp (quart (square X6))) (sin (- X4 (+ (- (- (- X14 (- (- (* (- X18 (- X13 (mysqrt (mysqrt (- (cube X6) X12))))) (- (* X13 (cube X6)) (+ (- X12 X11) (+ (- X12 X13) (square X9))))) (* (mysqrt (- (cube X15) (- (square X9) (* X14 X13)))) X18)) (* X14 X13))) (cube (- X6 (sin (- X18 X13))))) X6) X12))))) X12)))) (- (* X14 (sin (- (mysqrt X6) (+ (- (- (quart X14) (cube (- X6 (sin (- X18 (square X9)))))) X9) (square X13))))) (+ (- X12 (mysqrt X13)) (square X9)))) (* X11 (* X11 (* X6 (sin (sin (sin X18))))))))) (- (square X9) (* X14 X13)))) (mysqrt (- X6 X3))) (square (- (cube X15) X3)))))) + 0.0512241480213157
+MSE: 0.036183527341113
+MAE: 0.14965293512345454
+</code></pre>
+
+<pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -fused fusedModel.txt
+MSE fused Model: 0.03950888612009337
+MAE fused Model: 0.15696745165002576
+</code></pre>
+
+
+
+
 <h1> <a name="tutorial" class="anchor" href="#tutorial"><span class="octicon
  octicon-link"></span></a>Symbolic Regression Learner: Kaggle bond price dataset</h1>
 
@@ -184,37 +218,7 @@ MAE fused Model: 0.5816370761201752
 </code></pre>
 
 
-<h1>
-<a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Symbolic Regression
-Learner:  NOx Emissions dataset</h1>
 
-The data is split into training and test set. We first retrieve models from the training set: 
-<pre><code>$ java -jar sr.jar -train path_to_NOx_train_data -minutes 60 
-</code></pre>
-
-Then, the obtained models are tested on the test set:
-<pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -scaled knee.txt 
-(0.3503123449969823 .* (* (- X6 (* X11 (* X11 (- (- (* X18 X11) (- X13 X9)) X14)))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (* X14 X13)) (mysqrt (mysqrt X3))) (square (- (cube X15) X3)))))) + 0.0666665555347619
-MSE: 0.03866067788176831
-MAE: 0.15697528915065745
-</code></pre>
-
-<pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -scaled leastComplex.txt 
-(0.3588259382986629 .* X13) + 0.0677718532771849
-MSE: 0.05669892879042211
-MAE: 0.18320088883003482
-</code></pre>
-
-<pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -scaled mostAccurate.txt 
-(0.3293701574352099 .* (* (- X6 (* X11 (* X11 (* X11 (sin (sin (- (- X18 (- X13 X9)) X14))))))) (- (mysqrt (- (cube X6) X12)) (+ (- (- (quart X9) (- (mysqrt (mysqrt (- (* (- X13 (* X12 (mysqrt (- (cube (* (exp (quart (square X6))) (sin (- X4 (+ (- (- (- X14 (- (- (* (- X18 (- X13 (mysqrt (mysqrt (- (cube X6) X12))))) (- (* X13 (cube X6)) (+ (- X12 X11) (+ (- X12 X13) (square X9))))) (* (mysqrt (- (cube X15) (- (square X9) (* X14 X13)))) X18)) (* X14 X13))) (cube (- X6 (sin (- X18 X13))))) X6) X12))))) X12)))) (- (* X14 (sin (- (mysqrt X6) (+ (- (- (quart X14) (cube (- X6 (sin (- X18 (square X9)))))) X9) (square X13))))) (+ (- X12 (mysqrt X13)) (square X9)))) (* X11 (* X11 (* X6 (sin (sin (sin X18))))))))) (- (square X9) (* X14 X13)))) (mysqrt (- X6 X3))) (square (- (cube X15) X3)))))) + 0.0512241480213157
-MSE: 0.036183527341113
-MAE: 0.14965293512345454
-</code></pre>
-
-<pre><code>$ java -jar sr.jar -test path_to_NOx_test_data -integer false -fused fusedModel.txt
-MSE fused Model: 0.03950888612009337
-MAE fused Model: 0.15696745165002576
-</code></pre>
 
 
 <h1>

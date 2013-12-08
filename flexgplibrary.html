@@ -17,7 +17,7 @@
   <body>
 
       <header>
-        <h1>FlexGP</h1>
+        <h1><a href="index.html">link</a>FlexGP</h1>
         <p>Tutorial and Blog</p>
       </header>
 
@@ -76,13 +76,14 @@ octicon-link"></span></a>Communication layer</h1>
 octicon-link"></span></a>Interactions with Cloud server</h2>
 
 <p>The communication layer relies on two cloud server utilities provided by standard cloud management tools such
- as euca-tools (link here) or amazon-ec2:</p>
+ as the <a href="http://www.eucalyptus.com/eucalyptus-cloud/tools">euca2ools</a> or the
+ <a href="http://aws.amazon.com/developertools/351">Amazon EC2 API tools<\a>:</p>
 
 <ol>
 <li><p><strong>Self IP discovery</strong>: each cloud node running the FlexGP library self
  identifies itself at the beginning of the run.</p></li>
 <li><p><strong>IP discovery of other FlexGP nodes</strong>: each node refreshes periodically the list of IP directions
- started with the same security keypair. This allows to detect when extra nodes are added to a FlexGP run, thus providing
+ started with the same security keypair. This allows to detect when new nodes are added to a FlexGP run, thus providing
  elasticity to FlexGP.</p></li>
 </ol>
 

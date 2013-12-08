@@ -72,6 +72,7 @@ octicon-link"></span></a>Communication layer</h1>
 <p>FlexGP provides a TCP/IP communication layer that allows to pass messages between cloud nodes running the FlexGP
  library. This way, the FlexGP library enables migrations in cloud environments.</p>
 
+
 <h2><a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon
 octicon-link"></span></a>Interactions with Cloud server</h2>
 
@@ -99,8 +100,8 @@ octicon-link"></span></a>Message Passing</h2>
 <li><p><strong>Broadcast Messages</strong>: Every time a nodes refreshes its list of IPs, it pings all the retrieved
  IPs and filters unresponsive nodes, i.e. nodes that did not reply to the ping message. Such broadcast signals are used
  to maintain a list of responsive or “good” IP directions.</p></li>
-<li><p><strong>Migrant Messages</strong>: this functionality allows FlexGP nodes to perform migration. FlexGP provides an abstract
- Migrant Message class that needs to be extended and customized for each EC learner. This customization is necessary
+<li><p><strong>Migrant Messages</strong>: this functionality allows FlexGP nodes to perform migrations. FlexGP provides an abstract
+ Migrant Message class that needs to be extended and customized for each learner. This customization is necessary
  since different learners employ different representations.</p></li>
 </ol>
 

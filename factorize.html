@@ -37,36 +37,40 @@
 href="#flexgp-machine-learning-with-genetic-programming"><span class="octicon 
 octicon-link"></span></a>Setting learner autoconfiguration with the Factorize syntax</h1>
 
+<p>The auto-configuration of each learner relies on two files containing the specification of the parameters in
+ Factorize syntax. These two files need to be provided by the user since they are specific of each learner:</p>
+
+<ol>
+<li><p>The first files specifies the values of fixed arguments (such as dataset or number of threads) and the
+ parameters that will be factored (these parameters will be explored in the cloud runs).</p></li>
+<li><p>In the second file, the possible values of the parameters are specified using the Factorize syntax.</p></li>
+</ol>
 The Factorize syntax has been designed to specify the spectrum of possible values of the input parameters of any
 GP-based learner. The proposed syntax is aimed to be simple and intuitive. 
 
 Note: all the brackets, words, numbers, and colons used in the following examples are separated with spaces. 
 
 
-<h1><a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>Enabling
+<h1><a name="tutorial" class="anchor" href="#tutorial"><span class="octicon octicon-link"></span></a>First file: enabling
  the exploration of input parameters</h1>
 
 The parameters of the learners can be whether fixed or factorized. The syntax employed to declare fixed parameters is:
 <pre><code>learner parameter_name value
 </code></pre>
 
-<p>Example:</p>
-
-<pre><code>
-</code></pre>
-
-The following syntax is employed to set the parameters that will be factored:
+while the following syntax is employed to set the parameters that will be factored:
 
 <pre><code>factorizedParams{parameter_name_1,...,parameter_name_N}
 </code></pre>
 
 <p>Example:</p>
 
-<pre><code>learner threads 4factorizedParams{selection,mutation_rate,crossover_rate,max_generation}
+<pre><code>learner threads 4
+factorizedParams{selection,mutation_rate,crossover_rate,max_generation}
 </code></pre>
 
 
-<h1><a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Specifying possible
+<h1><a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Second file: Specifying possible
 values for the parameters using the Factorize Syntax</h1>
 
 
